@@ -30,7 +30,7 @@ def solve():
 
 
 
-@app.route('/my-link/')
+@app.route('/optimize/')
 def my_link():
 	x = solve() 
 	return str(x)
