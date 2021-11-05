@@ -32,8 +32,9 @@ def solve():
 
 @app.route('/optimize/')
 def my_link():
-	x = solve() 
+	x = 4 #solve() 
 	return str(x)
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
