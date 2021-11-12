@@ -32,7 +32,7 @@ def solve():
 
 @app.route('/optimize/')
 def my_link():
-	x = 4 #solve() 
+	x = solve() 
 	return str(x)
 
 
