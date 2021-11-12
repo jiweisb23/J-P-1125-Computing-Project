@@ -1,0 +1,487 @@
+Last login: Thu Nov 11 16:13:38 on console
+jiweisb2@Weisberg-Command-Center-2 ~ % ssh -i tt  root@167.71.190.61
+Warning: Identity file tt not accessible: No such file or directory.
+^[[A^[[Bssh: connect to host 167.71.190.61 port 22: Connection refused
+jiweisb2@Weisberg-Command-Center-2 ~ % ssh -i tt  root@167.71.190.61
+Warning: Identity file tt not accessible: No such file or directory.
+The authenticity of host '167.71.190.61 (167.71.190.61)' can't be established.
+ECDSA key fingerprint is SHA256:TUC0FtCtAiFCjF1yGxzU4WCyjnaN4M+0b0RNp3kUSwo.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '167.71.190.61' (ECDSA) to the list of known hosts.
+root@167.71.190.61's password: 
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-88-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ System information disabled due to load higher than 1.0
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~# git clone https://github.com/jiweisb23/J-P-1125-Computing-Project.git
+Cloning into 'J-P-1125-Computing-Project'...
+remote: Enumerating objects: 76, done.
+remote: Counting objects: 100% (76/76), done.
+remote: Compressing objects: 100% (63/63), done.
+remote: Total 76 (delta 33), reused 24 (delta 7), pack-reused 0
+Unpacking objects: 100% (76/76), 11.98 KiB | 255.00 KiB/s, done.
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~# ls
+J-P-1125-Computing-Project  snap
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~# cd J-P-1125-Computing-Project/
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# ls
+LICENSE  README.md  Server.py  index.html  templates  testSolve.py
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python Server.py
+
+Command 'python' not found, did you mean:
+
+  command 'python3' from deb python3
+  command 'python' from deb python-is-python3
+
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python3 Server.py 
+Traceback (most recent call last):
+  File "Server.py", line 1, in <module>
+    import pulp
+ModuleNotFoundError: No module named 'pulp'
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# pip3 pulp
+
+Command 'pip3' not found, but can be installed with:
+
+apt install python3-pip
+
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# apt install python3-pip
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  binutils binutils-common binutils-x86-64-linux-gnu build-essential cpp cpp-9 dpkg-dev fakeroot g++ g++-9 gcc gcc-9 gcc-9-base
+  libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan5 libatomic1 libbinutils libc-dev-bin libc6-dev libcc1-0
+  libcrypt-dev libctf-nobfd0 libctf0 libdpkg-perl libexpat1-dev libfakeroot libfile-fcntllock-perl libgcc-9-dev libgomp1 libisl22 libitm1
+  liblsan0 libmpc3 libpython3-dev libpython3.8-dev libquadmath0 libstdc++-9-dev libtsan0 libubsan1 linux-libc-dev make manpages-dev
+  python-pip-whl python3-dev python3-wheel python3.8-dev zlib1g-dev
+Suggested packages:
+  binutils-doc cpp-doc gcc-9-locales debian-keyring g++-multilib g++-9-multilib gcc-9-doc gcc-multilib autoconf automake libtool flex bison gdb
+  gcc-doc gcc-9-multilib glibc-doc bzr libstdc++-9-doc make-doc
+The following NEW packages will be installed:
+  binutils binutils-common binutils-x86-64-linux-gnu build-essential cpp cpp-9 dpkg-dev fakeroot g++ g++-9 gcc gcc-9 gcc-9-base
+  libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan5 libatomic1 libbinutils libc-dev-bin libc6-dev libcc1-0
+  libcrypt-dev libctf-nobfd0 libctf0 libdpkg-perl libexpat1-dev libfakeroot libfile-fcntllock-perl libgcc-9-dev libgomp1 libisl22 libitm1
+  liblsan0 libmpc3 libpython3-dev libpython3.8-dev libquadmath0 libstdc++-9-dev libtsan0 libubsan1 linux-libc-dev make manpages-dev
+  python-pip-whl python3-dev python3-pip python3-wheel python3.8-dev zlib1g-dev
+0 upgraded, 50 newly installed, 0 to remove and 1 not upgraded.
+Need to get 49.8 MB of archives.
+After this operation, 214 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Ign:1 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 binutils-common amd64 2.34-6ubuntu1.1
+Ign:2 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libbinutils amd64 2.34-6ubuntu1.1
+Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 binutils-common amd64 2.34-6ubuntu1.1
+  404  Not Found [IP: 172.67.148.71 80]
+Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libbinutils amd64 2.34-6ubuntu1.1
+  404  Not Found [IP: 172.67.148.71 80]
+Ign:3 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libctf-nobfd0 amd64 2.34-6ubuntu1.1
+Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libctf-nobfd0 amd64 2.34-6ubuntu1.1
+  404  Not Found [IP: 172.67.148.71 80]
+Ign:4 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libctf0 amd64 2.34-6ubuntu1.1
+Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libctf0 amd64 2.34-6ubuntu1.1
+  404  Not Found [IP: 172.67.148.71 80]
+Ign:5 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.34-6ubuntu1.1
+Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.34-6ubuntu1.1
+  404  Not Found [IP: 172.67.148.71 80]
+Ign:6 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 binutils amd64 2.34-6ubuntu1.1
+Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 binutils amd64 2.34-6ubuntu1.1
+  404  Not Found [IP: 172.67.148.71 80]
+Get:7 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libc-dev-bin amd64 2.31-0ubuntu9.2 [71.8 kB]
+Ign:8 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 linux-libc-dev amd64 5.4.0-88.99
+Err:8 http://security.ubuntu.com/ubuntu focal-updates/main amd64 linux-libc-dev amd64 5.4.0-88.99
+  404  Not Found [IP: 172.67.148.71 80]
+Get:9 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libcrypt-dev amd64 1:4.4.10-10ubuntu4 [104 kB]
+Get:10 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libc6-dev amd64 2.31-0ubuntu9.2 [2520 kB]
+Get:11 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 gcc-9-base amd64 9.3.0-17ubuntu1~20.04 [19.1 kB]
+Get:12 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libisl22 amd64 0.22.1-1 [592 kB]
+Get:13 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libmpc3 amd64 1.1.0-1 [40.8 kB]
+Get:14 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 cpp-9 amd64 9.3.0-17ubuntu1~20.04 [7494 kB]
+Get:15 http://mirrors.digitalocean.com/ubuntu focal/main amd64 cpp amd64 4:9.3.0-1ubuntu2 [27.6 kB]
+Get:16 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libcc1-0 amd64 10.3.0-1ubuntu1~20.04 [48.8 kB]
+Get:17 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libgomp1 amd64 10.3.0-1ubuntu1~20.04 [102 kB]
+Get:18 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libitm1 amd64 10.3.0-1ubuntu1~20.04 [26.2 kB]
+Get:19 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libatomic1 amd64 10.3.0-1ubuntu1~20.04 [9284 B]
+Get:20 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libasan5 amd64 9.3.0-17ubuntu1~20.04 [394 kB]
+Get:21 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 liblsan0 amd64 10.3.0-1ubuntu1~20.04 [835 kB]
+Get:22 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libtsan0 amd64 10.3.0-1ubuntu1~20.04 [2009 kB]
+Get:23 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libubsan1 amd64 10.3.0-1ubuntu1~20.04 [784 kB]
+Get:24 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libquadmath0 amd64 10.3.0-1ubuntu1~20.04 [146 kB]
+Get:25 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libgcc-9-dev amd64 9.3.0-17ubuntu1~20.04 [2360 kB]
+Get:26 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 gcc-9 amd64 9.3.0-17ubuntu1~20.04 [8241 kB]
+Get:27 http://mirrors.digitalocean.com/ubuntu focal/main amd64 gcc amd64 4:9.3.0-1ubuntu2 [5208 B]
+Get:28 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libstdc++-9-dev amd64 9.3.0-17ubuntu1~20.04 [1714 kB]
+Get:29 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 g++-9 amd64 9.3.0-17ubuntu1~20.04 [8405 kB]
+Get:30 http://mirrors.digitalocean.com/ubuntu focal/main amd64 g++ amd64 4:9.3.0-1ubuntu2 [1604 B]
+Get:31 http://mirrors.digitalocean.com/ubuntu focal/main amd64 make amd64 4.2.1-1.2 [162 kB]
+Get:32 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libdpkg-perl all 1.19.7ubuntu3 [230 kB]
+Get:33 http://mirrors.digitalocean.com/ubuntu focal/main amd64 dpkg-dev all 1.19.7ubuntu3 [679 kB]
+Get:34 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 build-essential amd64 12.8ubuntu1.1 [4664 B]
+Get:35 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libfakeroot amd64 1.24-1 [25.7 kB]
+Get:36 http://mirrors.digitalocean.com/ubuntu focal/main amd64 fakeroot amd64 1.24-1 [62.6 kB]
+Get:37 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libalgorithm-diff-perl all 1.19.03-2 [46.6 kB]
+Get:38 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libalgorithm-diff-xs-perl amd64 0.04-6 [11.3 kB]
+Get:39 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libalgorithm-merge-perl all 0.08-3 [12.0 kB]
+Get:40 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libexpat1-dev amd64 2.2.9-1build1 [116 kB]
+Get:41 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libfile-fcntllock-perl amd64 0.22-3build4 [33.1 kB]
+Get:42 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libpython3.8-dev amd64 3.8.10-0ubuntu1~20.04.1 [3948 kB]
+Get:43 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libpython3-dev amd64 3.8.2-0ubuntu2 [7236 B]
+Get:44 http://mirrors.digitalocean.com/ubuntu focal/main amd64 manpages-dev all 5.05-1 [2266 kB]
+Get:45 http://mirrors.digitalocean.com/ubuntu focal-updates/universe amd64 python-pip-whl all 20.0.2-5ubuntu1.6 [1805 kB]
+Get:46 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-2ubuntu1.2 [155 kB]
+Get:47 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 python3.8-dev amd64 3.8.10-0ubuntu1~20.04.1 [510 kB]
+Get:48 http://mirrors.digitalocean.com/ubuntu focal/main amd64 python3-dev amd64 3.8.2-0ubuntu2 [1212 B]
+Get:49 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 python3-wheel all 0.34.2-1 [23.8 kB]
+Get:50 http://mirrors.digitalocean.com/ubuntu focal-updates/universe amd64 python3-pip all 20.0.2-5ubuntu1.6 [231 kB]
+Fetched 46.3 MB in 3s (13.4 MB/s) 
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/b/binutils/binutils-common_2.34-6ubuntu1.1_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/b/binutils/libbinutils_2.34-6ubuntu1.1_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/b/binutils/libctf-nobfd0_2.34-6ubuntu1.1_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/b/binutils/libctf0_2.34-6ubuntu1.1_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/b/binutils/binutils-x86-64-linux-gnu_2.34-6ubuntu1.1_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/b/binutils/binutils_2.34-6ubuntu1.1_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_5.4.0-88.99_amd64.deb  404  Not Found [IP: 172.67.148.71 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python3 Server.py 
+Traceback (most recent call last):
+  File "Server.py", line 1, in <module>
+    import pulp
+ModuleNotFoundError: No module named 'pulp'
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# apt install python3-pulp
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  coinor-cbc coinor-libcbc3 coinor-libcgl1 coinor-libclp1 coinor-libcoinutils3v5 coinor-libosi1v5 libblas3 libgfortran5 liblapack3 libquadmath0
+  python3-pyparsing
+Suggested packages:
+  python-pyparsing-doc
+The following NEW packages will be installed:
+  coinor-cbc coinor-libcbc3 coinor-libcgl1 coinor-libclp1 coinor-libcoinutils3v5 coinor-libosi1v5 libblas3 libgfortran5 liblapack3 libquadmath0
+  python3-pulp python3-pyparsing
+0 upgraded, 12 newly installed, 0 to remove and 1 not upgraded.
+Need to get 6021 kB/6167 kB of archives.
+After this operation, 20.2 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libblas3 amd64 3.9.0-1build1 [142 kB]
+Get:2 http://mirrors.digitalocean.com/ubuntu focal-updates/main amd64 libgfortran5 amd64 10.3.0-1ubuntu1~20.04 [736 kB]
+Get:3 http://mirrors.digitalocean.com/ubuntu focal/main amd64 liblapack3 amd64 3.9.0-1build1 [2154 kB]
+Get:4 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 coinor-libcoinutils3v5 amd64 2.11.4+repack1-1 [480 kB]
+Get:5 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 coinor-libosi1v5 amd64 0.108.6+repack1-1 [294 kB]
+Get:6 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 coinor-libclp1 amd64 1.17.5+repack1-1 [937 kB]
+Get:7 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 coinor-libcgl1 amd64 0.60.3+repack1-2 [430 kB]
+Get:8 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 coinor-libcbc3 amd64 2.10.3+repack1-1build1 [723 kB]
+Get:9 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 coinor-cbc amd64 2.10.3+repack1-1build1 [11.4 kB]
+Get:10 http://mirrors.digitalocean.com/ubuntu focal/main amd64 python3-pyparsing all 2.4.6-1 [61.3 kB]
+Get:11 http://mirrors.digitalocean.com/ubuntu focal/universe amd64 python3-pulp all 1.6.0+dfsg1-5 [52.5 kB]
+Fetched 6021 kB in 1s (7492 kB/s)   
+Selecting previously unselected package libblas3:amd64.
+(Reading database ... 63555 files and directories currently installed.)
+Preparing to unpack .../00-libblas3_3.9.0-1build1_amd64.deb ...
+Unpacking libblas3:amd64 (3.9.0-1build1) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../01-libquadmath0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libquadmath0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libgfortran5:amd64.
+Preparing to unpack .../02-libgfortran5_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libgfortran5:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package liblapack3:amd64.
+Preparing to unpack .../03-liblapack3_3.9.0-1build1_amd64.deb ...
+Unpacking liblapack3:amd64 (3.9.0-1build1) ...
+Selecting previously unselected package coinor-libcoinutils3v5.
+Preparing to unpack .../04-coinor-libcoinutils3v5_2.11.4+repack1-1_amd64.deb ...
+Unpacking coinor-libcoinutils3v5 (2.11.4+repack1-1) ...
+Selecting previously unselected package coinor-libosi1v5.
+Preparing to unpack .../05-coinor-libosi1v5_0.108.6+repack1-1_amd64.deb ...
+Unpacking coinor-libosi1v5 (0.108.6+repack1-1) ...
+Selecting previously unselected package coinor-libclp1.
+Preparing to unpack .../06-coinor-libclp1_1.17.5+repack1-1_amd64.deb ...
+Unpacking coinor-libclp1 (1.17.5+repack1-1) ...
+Selecting previously unselected package coinor-libcgl1.
+Preparing to unpack .../07-coinor-libcgl1_0.60.3+repack1-2_amd64.deb ...
+Unpacking coinor-libcgl1 (0.60.3+repack1-2) ...
+Selecting previously unselected package coinor-libcbc3.
+Preparing to unpack .../08-coinor-libcbc3_2.10.3+repack1-1build1_amd64.deb ...
+Unpacking coinor-libcbc3 (2.10.3+repack1-1build1) ...
+Selecting previously unselected package coinor-cbc.
+Preparing to unpack .../09-coinor-cbc_2.10.3+repack1-1build1_amd64.deb ...
+Unpacking coinor-cbc (2.10.3+repack1-1build1) ...
+Selecting previously unselected package python3-pyparsing.
+Preparing to unpack .../10-python3-pyparsing_2.4.6-1_all.deb ...
+Unpacking python3-pyparsing (2.4.6-1) ...
+Selecting previously unselected package python3-pulp.
+Preparing to unpack .../11-python3-pulp_1.6.0+dfsg1-5_all.deb ...
+Unpacking python3-pulp (1.6.0+dfsg1-5) ...
+Setting up libblas3:amd64 (3.9.0-1build1) ...
+update-alternatives: using /usr/lib/x86_64-linux-gnu/blas/libblas.so.3 to provide /usr/lib/x86_64-linux-gnu/libblas.so.3 (libblas.so.3-x86_64-linux-gnu) in auto mode
+Setting up python3-pyparsing (2.4.6-1) ...
+Setting up libquadmath0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libgfortran5:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up liblapack3:amd64 (3.9.0-1build1) ...
+update-alternatives: using /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3 to provide /usr/lib/x86_64-linux-gnu/liblapack.so.3 (liblapack.so.3-x86_64-linux-gnu) in auto mode
+Setting up coinor-libcoinutils3v5 (2.11.4+repack1-1) ...
+Setting up coinor-libosi1v5 (0.108.6+repack1-1) ...
+Setting up coinor-libclp1 (1.17.5+repack1-1) ...
+Setting up coinor-libcgl1 (0.60.3+repack1-2) ...
+Setting up coinor-libcbc3 (2.10.3+repack1-1build1) ...
+Setting up coinor-cbc (2.10.3+repack1-1build1) ...
+Setting up python3-pulp (1.6.0+dfsg1-5) ...
+/usr/lib/python3/dist-packages/pulp/pulp.py:700: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if other is 0: return self
+/usr/lib/python3/dist-packages/pulp/pulp.py:720: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if other is 0: return self
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python3 Server.py 
+Traceback (most recent call last):
+  File "Server.py", line 2, in <module>
+    from flask import Flask, render_template
+ModuleNotFoundError: No module named 'flask'
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# apt install python3-flask
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  javascript-common libjs-jquery python3-itsdangerous python3-pyinotify python3-werkzeug
+Suggested packages:
+  apache2 | lighttpd | httpd python-flask-doc python-pyinotify-doc ipython3 python-werkzeug-doc python3-lxml python3-termcolor python3-watchdog
+The following NEW packages will be installed:
+  javascript-common libjs-jquery python3-flask python3-itsdangerous python3-pyinotify python3-werkzeug
+0 upgraded, 6 newly installed, 0 to remove and 1 not upgraded.
+Need to get 637 kB of archives.
+After this operation, 2296 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://mirrors.digitalocean.com/ubuntu focal/main amd64 javascript-common all 11 [6066 B]
+Get:2 http://mirrors.digitalocean.com/ubuntu focal/main amd64 libjs-jquery all 3.3.1~dfsg-3 [329 kB]
+Get:3 http://mirrors.digitalocean.com/ubuntu focal/main amd64 python3-itsdangerous all 1.1.0-1 [14.6 kB]
+Get:4 http://mirrors.digitalocean.com/ubuntu focal/main amd64 python3-werkzeug all 0.16.1+dfsg1-2 [183 kB]
+Get:5 http://mirrors.digitalocean.com/ubuntu focal/main amd64 python3-flask all 1.1.1-2 [80.3 kB]
+Get:6 http://mirrors.digitalocean.com/ubuntu focal/main amd64 python3-pyinotify all 0.9.6-1.2ubuntu1 [24.8 kB]
+Fetched 637 kB in 0s (1518 kB/s)        
+Selecting previously unselected package javascript-common.
+(Reading database ... 63648 files and directories currently installed.)
+Preparing to unpack .../0-javascript-common_11_all.deb ...
+Unpacking javascript-common (11) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../1-libjs-jquery_3.3.1~dfsg-3_all.deb ...
+Unpacking libjs-jquery (3.3.1~dfsg-3) ...
+Selecting previously unselected package python3-itsdangerous.
+Preparing to unpack .../2-python3-itsdangerous_1.1.0-1_all.deb ...
+Unpacking python3-itsdangerous (1.1.0-1) ...
+Selecting previously unselected package python3-werkzeug.
+Preparing to unpack .../3-python3-werkzeug_0.16.1+dfsg1-2_all.deb ...
+Unpacking python3-werkzeug (0.16.1+dfsg1-2) ...
+Selecting previously unselected package python3-flask.
+Preparing to unpack .../4-python3-flask_1.1.1-2_all.deb ...
+Unpacking python3-flask (1.1.1-2) ...
+Selecting previously unselected package python3-pyinotify.
+Preparing to unpack .../5-python3-pyinotify_0.9.6-1.2ubuntu1_all.deb ...
+Unpacking python3-pyinotify (0.9.6-1.2ubuntu1) ...
+Setting up javascript-common (11) ...
+Setting up python3-pyinotify (0.9.6-1.2ubuntu1) ...
+Setting up python3-itsdangerous (1.1.0-1) ...
+Setting up libjs-jquery (3.3.1~dfsg-3) ...
+Setting up python3-werkzeug (0.16.1+dfsg1-2) ...
+Setting up python3-flask (1.1.1-2) ...
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python3 Server.py 
+ * Serving Flask app "Server" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 343-654-599
+^Croot@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# ls
+LICENSE  README.md  Server.py  index.html  templates  testSolve.py
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), 291 bytes | 145.00 KiB/s, done.
+From https://github.com/jiweisb23/J-P-1125-Computing-Project
+   6da58be..5f29b20  main       -> origin/main
+Updating 6da58be..5f29b20
+Fast-forward
+ Server.py | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python3 Server.py 
+ * Serving Flask app "Server" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+67.183.39.147 - - [12/Nov/2021 00:13:02] "GET / HTTP/1.1" 200 -
+67.183.39.147 - - [12/Nov/2021 00:13:02] "GET /favicon.ico HTTP/1.1" 404 -
+67.183.39.147 - - [12/Nov/2021 00:13:04] "GET /optimize/ HTTP/1.1" 200 -
+^Croot@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), 269 bytes | 134.00 KiB/s, done.
+From https://github.com/jiweisb23/J-P-1125-Computing-Project
+   5f29b20..ee0b678  main       -> origin/main
+Updating 5f29b20..ee0b678
+Fast-forward
+ Server.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+root@ubuntu-s-1vcpu-1gb-nyc3-01:~/J-P-1125-Computing-Project# python3 Server.py 
+ * Serving Flask app "Server" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+67.183.39.147 - - [12/Nov/2021 00:13:52] "GET / HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:13:54] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:13:56] "GET /optimize/ HTTP/1.1" 200 -
+67.161.96.175 - - [12/Nov/2021 00:17:38] "GET / HTTP/1.1" 200 -
+67.161.96.175 - - [12/Nov/2021 00:17:39] "GET /favicon.ico HTTP/1.1" 404 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:17:41] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:20:20] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:20:23] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:20:25] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:20:56] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:20:57] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:21:01] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:21:04] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.161.96.175 - - [12/Nov/2021 00:21:07] "GET /optimize/ HTTP/1.1" 200 -
+67.183.39.147 - - [12/Nov/2021 00:24:32] "GET / HTTP/1.1" 200 -
+67.183.39.147 - - [12/Nov/2021 00:24:33] "GET /favicon.ico HTTP/1.1" 404 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:40] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:41] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:42] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:43] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:44] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:44] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:45] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:45] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:45] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:51] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:52] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:24:53] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:25:00] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:25:00] "GET /optimize/ HTTP/1.1" 200 -
+RESULT:
+Optimal
+2.0
+-8.0
+67.183.39.147 - - [12/Nov/2021 00:25:01] "GET /optimize/ HTTP/1.1" 200 -
+
