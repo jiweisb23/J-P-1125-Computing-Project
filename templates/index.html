@@ -1,7 +1,7 @@
 <!doctype html>
 
 
-<head><title>Test</title> 
+<head><title>PowerFlowAI</title> 
     <meta charset=utf-8> </head>
 
 
@@ -15,6 +15,7 @@
 	<input type="text" placeholder = "NewStatus {Arrived / Charging}" id="newStatus"><br>
 
 
+	<button onclick="addVehicle()">Add Vehicle</button>
 	<button onclick="optimize()">Optimize</button>
 	<div id="output"></div>
 
@@ -42,6 +43,35 @@
 		
 	}
 
+	</script>
+
+	<script>
+	function addVehicle(){
+	   var vehicleNo = document.getElementById('vehicleNo').value;
+	   var currentTime = document.getElementById('currentTime').value;
+	   var currentCharge = document.getElementById('currentCharge').value;
+	   var desiredCharge = document.getElementById('desiredCharge').value;
+	   var departureTime = document.getElementById('departureTime').value;
+	   var newStatus = document.getElementById('newStatus').value;
+	   console.log(vehicleNo);
+	   console.log(currentTime);
+	   console.log(currentCharge);
+	   console.log(desiredCharge);
+	   console.log(departureTime);
+	   console.log(newStatus);
+
+	   var url = `/addVehicle?vehicleNo=${vehicleNo}&currentTime=${currentTime}&currentCharge=${currentCharge}&desiredCharge=${desiredCharge}&departureTime=${departureTime}&newStatus=${newStatus}`;
+
+	   superagent
+	       .get(url)
+	       .end(function(err, res){
+	           if (err) {
+	               console.log('err:',err);
+	           } else {
+	               console.log('response:',res.text);
+	           }
+	       });
+	}
 	</script>
 
 
