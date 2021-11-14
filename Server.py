@@ -11,8 +11,8 @@ mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root' 
 root_mysql_pass='a7dd542f856d82917597552e3531df962557c4169e225f36'
 app.config['MYSQL_DATABASE_PASSWORD'] = root_mysql_pass
-app.config['MYSQL_DATABASE_DB'] = 'Vehicles' #ToDo: create SQL DB
-app.config['MYSQL_DATABASE_HOST'] = 'localhost' #ToDo: Update. IP?
+app.config['MYSQL_DATABASE_DB'] = 'Vehicles' 
+app.config['MYSQL_DATABASE_HOST'] = '142.93.179.86' #ToDo: Update from localhost?. IP?
 mysql.init_app(app)
 
 
@@ -34,7 +34,6 @@ def addVehicle():
     desiredCharge = vehicle['desiredCharge']
     departureTime = vehicle['departureTime']
     newStatus = vehicle['newStatus']
-
 
     cur = mysql.get_db().cursor()
     cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus) VALUES(%s, %s, %s, %s, %s, %s)",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
