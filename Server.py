@@ -13,7 +13,7 @@ root_mysql_pass='a7dd542f856d82917597552e3531df962557c4169e225f36'
 admin_pass = 'eb779ad7864c5b010441550bc3903c4bf73f58bd868ed52a'
 app.config['MYSQL_DATABASE_PASSWORD'] = admin_pass
 app.config['MYSQL_DATABASE_DB'] = 'Vehicles' 
-app.config['MYSQL_DATABASE_HOST'] = '142.93.179.86:3306' #ToDo: Update from localhost?. IP? 142.93.179.86:22 or 127.0.0.1
+app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1' #ToDo: Update from localhost?. IP? 142.93.179.86:22 or 127.0.0.1
 mysql.init_app(app)
 
 
@@ -39,7 +39,7 @@ def addVehicle():
     cur = mysql.get_db().cursor()
     cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus) VALUES(%s, %s, %s, %s, %s, %s)",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
     mysql.get_db().commit()
-    #return redirect('/GetVehicles') #ToDo: reroute to index.html instead? Note optimize is next step in workflow #return redirect('/GetVehicles')
+    return redirect('/GetVehicles') #ToDo: reroute to index.html instead? Note optimize is next step in workflow #return redirect('/GetVehicles')
 
 
 
