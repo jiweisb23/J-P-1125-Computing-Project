@@ -26,6 +26,7 @@ def index():
 
 #ToDo: Create SQL Table, create HTML? See https://github.com/onexi/threetiers/blob/main/web/templates/index.html
 #ToDo: Typecast all vars?
+#ToDo: do type checking on form
 @app.route('/addVehicle', methods = ['POST'])
 def addVehicle():
     # Fetch form data
