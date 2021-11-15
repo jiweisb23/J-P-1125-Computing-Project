@@ -13,7 +13,8 @@ root_mysql_pass='a7dd542f856d82917597552e3531df962557c4169e225f36'
 admin_pass = 'eb779ad7864c5b010441550bc3903c4bf73f58bd868ed52a'
 app.config['MYSQL_DATABASE_PASSWORD'] = admin_pass
 app.config['MYSQL_DATABASE_DB'] = 'Vehicles' 
-app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1' #ToDo: Update from localhost?. IP? 142.93.179.86:22 or 127.0.0.1
+app.config['MYSQL_DATABASE_HOST'] = 'localhost' #ToDo: Update from localhost?. IP? 142.93.179.86:22 or 127.0.0.1
+#app.config['MYSQL_DATABASE_PORT'] = 3306
 mysql.init_app(app)
 
 
