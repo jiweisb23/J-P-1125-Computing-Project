@@ -6,16 +6,20 @@
 
 
 
-    Input:<br>
-	<input type="text" placeholder = "Vehicle #" id="vehicleNo"><br>
-	<input type="text" placeholder = "Current Time (MM/DD/YYYY HH:MM)" id="currentTime"><br>
-	<input type="text" placeholder = "Current Charge (#%)" id="currentCharge"><br>
-	<input type="text" placeholder = "Desired Charge (#%)" id="desiredCharge"><br>
-	<input type="text" placeholder = "Departure Time (MM/DD/YYYY HH:MM)" id="departureTime"><br>
-	<input type="text" placeholder = "NewStatus {Arrived / Charging}" id="newStatus"><br>
+	
 
 
-	<button onclick="addVehicle()">Add Vehicle</button>
+	<form method="POST" action="/addVehicle">
+	    Add a Vehicle:<br>
+		<input type="text" placeholder = "Vehicle #" name="vehicleNo"/><br>
+		<input type="text" placeholder = "Current Time (MM/DD/YYYY HH:MM)" name="currentTime"/><br>
+		<input type="text" placeholder = "Current Charge (#%)" name="currentCharge"/><br>
+		<input type="text" placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
+		<input type="text" placeholder = "Departure Time (MM/DD/YYYY HH:MM)" name="departureTime"/><br>
+		<input type="text" placeholder = "NewStatus {Arrived / Charging}" name="newStatus"/><br>
+		<input type="submit">
+  	</form>
+
 	<button onclick="optimize()">Optimize</button>
 	<div id="output"></div>
 
@@ -46,7 +50,7 @@
 	</script>
 
 	<script>
-	function addVehicle(){
+	function XaddVehicle(){
 	   var vehicleNo = document.getElementById('vehicleNo').value;
 	   var currentTime = document.getElementById('currentTime').value;
 	   var currentCharge = document.getElementById('currentCharge').value;
@@ -60,7 +64,7 @@
 	   console.log(departureTime);
 	   console.log(newStatus);
 
-	   var url = `/addVehicle?vehicleNo=${vehicleNo}&currentTime=${currentTime}&currentCharge=${currentCharge}&desiredCharge=${desiredCharge}&departureTime=${departureTime}&newStatus=${newStatus}`;
+	   var url = `/XaddVehicle?vehicleNo=${vehicleNo}&currentTime=${currentTime}&currentCharge=${currentCharge}&desiredCharge=${desiredCharge}&departureTime=${departureTime}&newStatus=${newStatus}`;
 
 	   superagent
 	       .get(url)

@@ -25,7 +25,7 @@ def index():
 
 #ToDo: Create SQL Table, create HTML? See https://github.com/onexi/threetiers/blob/main/web/templates/index.html
 #ToDo: Typecast all vars?
-@app.route('/addVehicle', methods=['POST'])
+@app.route('/addVehicle', methods = ['POST'])
 def addVehicle():
     # Fetch form data
     vehicle = request.form
@@ -39,7 +39,7 @@ def addVehicle():
     cur = mysql.get_db().cursor()
     cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus) VALUES(%s, %s, %s, %s, %s, %s)",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
     mysql.get_db().commit()
-    return redirect('/GetVehicles') #ToDo: reroute to index.html instead? Note optimize is next step in workflow
+    #return redirect('/GetVehicles') #ToDo: reroute to index.html instead? Note optimize is next step in workflow #return redirect('/GetVehicles')
 
 
 
