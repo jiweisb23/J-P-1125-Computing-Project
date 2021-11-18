@@ -55,8 +55,10 @@ def GetVehicles():
 	html = ''
 	print("Blargh", file=sys.stderr)
 	print(response, file=sys.stderr)
+
 	if response > 0:
 		GetVehicles = cursor.fetchall()
+		print(GetVehicles)
 		return render_template('/GetVehicles.html', list=GetVehicles) #render_template('GetVehicles.html', list=GetVehicles)
 
 
