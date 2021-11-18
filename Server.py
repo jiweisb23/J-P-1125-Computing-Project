@@ -1,6 +1,7 @@
 import pulp
 from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
+import sys
 app = Flask(__name__)
 
 #See this to kill: https://stackoverflow.com/questions/4465959/python-errno-98-address-already-in-use
@@ -47,14 +48,19 @@ def addVehicle():
 
 #ToDo: Create HTML? See https://github.com/onexi/threetiers/blob/main/web/templates/colleges.html
 #ToDo: Typecast all vars to str?
-@app.route('/GetVehicles')
+@app.route('/GetVehicles/')
 def GetVehicles():
     cursor = mysql.get_db().cursor()
     response = cursor.execute("SELECT * FROM Vehicles")
-    html = ''    
+    html = ''
+	print("Blargh", file=sys.stderr))
+
+	print(_response, file=sys.stderr))
+
     if response > 0:
         GetVehicles = cursor.fetchall()
-        return render_template('GetVehicles.html', list=GetVehicles)
+        return render_template('index.html') #render_template('GetVehicles.html', list=GetVehicles)
+
 
 
 

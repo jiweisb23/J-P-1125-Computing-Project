@@ -78,6 +78,29 @@
 	}
 	</script>
 
+	<script>
+	function GetVehicles(){
+	   var url = '/GetVehicles/';
+
+	   superagent
+	       .get(url)
+	       .end(function(err, res){
+	           if (err) {
+	               console.log('err:',err);
+	           } else {
+	               console.log('response:',res.text);
+	               document.body.append(res.text)
+	               //return res.text
+
+	           }
+
+	       });
+
+		
+	}
+
+	</script>
+
 
 
 
