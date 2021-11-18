@@ -58,7 +58,7 @@ def GetVehicles():
 
 	if response > 0:
 		GetVehicles = cursor.fetchall()
-		print(GetVehicles)
+		print(solve(GetVehicles))
 		return render_template('/GetVehicles.html', list=GetVehicles) #render_template('GetVehicles.html', list=GetVehicles)
 
 
@@ -92,7 +92,7 @@ def solve(dbtable):
 
 @app.route('/optimize/')
 def my_link():
-	x = solve() 
+	x = solve()
 	return str(x)
 
 
