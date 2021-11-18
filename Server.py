@@ -30,19 +30,19 @@ def index():
 #ToDo: do type checking on form
 @app.route('/addVehicle', methods = ['POST'])
 def addVehicle():
-    # Fetch form data
-    vehicle = request.form
-    vehicleNo = vehicle['vehicleNo']
-    currentTime = vehicle['currentTime']
-    currentCharge = vehicle['currentCharge']
-    desiredCharge = vehicle['desiredCharge']
-    departureTime = vehicle['departureTime']
-    newStatus = vehicle['newStatus']
+	# Fetch form data
+	vehicle = request.form
+	vehicleNo = vehicle['vehicleNo']
+	currentTime = vehicle['currentTime']
+	currentCharge = vehicle['currentCharge']
+	desiredCharge = vehicle['desiredCharge']
+	departureTime = vehicle['departureTime']
+	newStatus = vehicle['newStatus']
 
-    cur = mysql.get_db().cursor()
-    cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus) VALUES(%s, %s, %s, %s, %s, %s)",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
-    mysql.get_db().commit()
-    return render_template('index.html') #ToDo: reroute to index.html instead? Note optimize is next step in workflow #return redirect('/GetVehicles')
+	cur = mysql.get_db().cursor()
+	cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus) VALUES(%s, %s, %s, %s, %s, %s)",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
+	mysql.get_db().commit()
+	return render_template('index.html') #ToDo: reroute to index.html instead? Note optimize is next step in workflow #return redirect('/GetVehicles')
 
 
 
@@ -50,16 +50,14 @@ def addVehicle():
 #ToDo: Typecast all vars to str?
 @app.route('/GetVehicles/')
 def GetVehicles():
-    cursor = mysql.get_db().cursor()
-    response = cursor.execute("SELECT * FROM Vehicles")
-    html = ''
-	print("Blargh", file=sys.stderr))
-
-	print(_response, file=sys.stderr))
-
-    if response > 0:
-        GetVehicles = cursor.fetchall()
-        return render_template('index.html') #render_template('GetVehicles.html', list=GetVehicles)
+	cursor = mysql.get_db().cursor()
+	response = cursor.execute("SELECT * FROM Vehicles")
+	html = ''
+	print("Blargh", file=sys.stderr)
+	print(_response, file=sys.stderr)
+	if response > 0:
+		GetVehicles = cursor.fetchall()
+		return render_template('index.html') #render_template('GetVehicles.html', list=GetVehicles)
 
 
 
