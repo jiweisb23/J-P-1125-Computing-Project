@@ -60,7 +60,7 @@ def GetVehicles():
 		GetVehicles = cursor.fetchall()
 		
 		print(solve(GetVehicles))
-		return GetVehicles
+		return str(GetVehicles)
 		#return render_template('/GetVehicles.html', list=GetVehicles) #render_template('GetVehicles.html', list=GetVehicles)
 
 
