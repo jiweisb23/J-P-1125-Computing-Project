@@ -54,7 +54,7 @@ def GetVehicles():
 	response = cursor.execute("SELECT * FROM Vehicles")
 	html = ''
 	print("Blargh", file=sys.stderr)
-	print(_response, file=sys.stderr)
+	print(response, file=sys.stderr)
 	if response > 0:
 		GetVehicles = cursor.fetchall()
 		return render_template('/index.html') #render_template('GetVehicles.html', list=GetVehicles)
