@@ -93,8 +93,8 @@ def solve(dbtable):
 
 
 @app.route('/optimize/')
-def my_link():
-	x = solve()
+def optimize():
+	#x = solve()
 	return str("under construction")
 
 
