@@ -66,9 +66,9 @@ def GetVehicles():
 
 
 #ToDo: Replace with Pulp Version of Peter's optimization project code 
-def solve():
-	x = pulp.LpVariable("x", 0, 3)
-	y = pulp.LpVariable("y", 0, 1)
+def solve(dbtable):
+	x = pulp.LpVariable("x", 0, int(dbtable[0][0]))
+	y = pulp.LpVariable("y", 0, int(dbtable[1][0]))
 
 	prob = pulp.LpProblem("myProblem", pulp.LpMinimize)
 
