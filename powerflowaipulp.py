@@ -173,6 +173,7 @@ def optimizer():
     status = prob.solve()
     print(p.value(m.objective))
 
+    '''
     ## =====================
     ## OUTPUT FILES
     ## =====================
@@ -251,6 +252,7 @@ def optimizer():
     plt.axes().set_ylabel(" Battery Energy (kWh) ")
     plt.grid(which='major', axis='both')
     plt.show()
+    '''
 
     return p.value(m.objective) 
 
