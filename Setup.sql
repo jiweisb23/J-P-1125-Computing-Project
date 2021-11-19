@@ -14,6 +14,7 @@ CREATE TABLE `Vehicles` (
    `departureTime`   varchar (40),
    `newStatus`   varchar (40),
    `lastChargingStatus`   varchar (40),
+   `recommendedChargeTime`   varchar (40),
    `estimatedSavings`   varchar (40),
    `recordStatus`   varchar (40)
 );

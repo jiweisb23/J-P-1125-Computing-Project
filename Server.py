@@ -54,7 +54,7 @@ def update(v):
     # Fetch form data
     id = v
     cur = mysql.get_db().cursor()
-    cur.execute("UPDATE vehicles SET recordStatus='inactive' WHERE vehicleNo=%s",(id))
+    cur.execute("UPDATE Vehicles SET recordStatus='inactive' WHERE vehicleNo=%s",(id))
     mysql.get_db().commit()
     return
 
