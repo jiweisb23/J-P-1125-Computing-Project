@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import math
 from pulp import *
 
-optimizer()
-
 def optimizer():
 
     m = p.LpModel('Charging', p.LpMinimize)
@@ -256,7 +254,7 @@ def optimizer():
 
     return p.value(m.objective) 
 
-
+optimizer()
 
 
 """
