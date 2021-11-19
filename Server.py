@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
 from datetime import datetime
 import pytz
-pytz.utc.localize( datetime.utcnow() )  
 import sys
 app = Flask(__name__)
 
@@ -36,6 +35,7 @@ def addVehicle():
 	# Fetch form data
 	vehicle = request.form
 	vehicleNo = vehicle['vehicleNo']
+	pytz.utc.localize( datetime.utcnow() )  
 	currentTime =  str(datetime.now())
 	print(currentTime)
 	currentCharge = vehicle['currentCharge']
