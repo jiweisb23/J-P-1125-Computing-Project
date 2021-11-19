@@ -8,7 +8,7 @@ from pulp import *
 
 def optimizer():
 
-    m = p.LpModel('Charging', p.LpMinimize)
+    m = p.LpProblem('Charging', p.LpMinimize)
     np.random.seed(2)
 
     ## ====================
