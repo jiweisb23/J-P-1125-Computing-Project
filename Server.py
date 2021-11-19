@@ -2,6 +2,8 @@ import pulp
 from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
 from datetime import datetime
+import pytz
+pytz.utc.localize( datetime.utcnow() )  
 import sys
 app = Flask(__name__)
 
