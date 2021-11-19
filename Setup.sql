@@ -12,7 +12,10 @@ CREATE TABLE `Vehicles` (
    `currentCharge`   varchar (40),
    `desiredCharge`   varchar (40),
    `departureTime`   varchar (40),
-   `newStatus`   varchar (40)
+   `newStatus`   varchar (40),
+   `lastChargingStatus`   varchar (40),
+   `estimatedSavings`   varchar (40),
+   `recordStatus`   varchar (40)
 );
 
 --  INSERT INTO Vehicles
