@@ -2,6 +2,7 @@ import pulp
 from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
 from datetime import datetime
+from datetime import timedelta
 import pytz
 import sys
 app = Flask(__name__)
@@ -36,7 +37,7 @@ def addVehicle():
 	vehicle = request.form
 	vehicleNo = vehicle['vehicleNo']
 	pytz.utc.localize( datetime.utcnow() )  
-	currentTime =  str(datetime.now())
+	currentTime =  str(datetime.now()-timedelta(hours=5))
 	print(currentTime)
 	currentCharge = vehicle['currentCharge']
 	desiredCharge = vehicle['desiredCharge']
