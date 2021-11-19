@@ -1,6 +1,7 @@
 import pulp
 from flask import Flask, render_template, request, redirect
 from flaskext.mysql import MySQL
+from datetime import datetime
 import sys
 app = Flask(__name__)
 
@@ -33,7 +34,7 @@ def addVehicle():
 	# Fetch form data
 	vehicle = request.form
 	vehicleNo = vehicle['vehicleNo']
-	currentTime = vehicle['currentTime']
+	currentTime =  str(datetime.now())
 	currentCharge = vehicle['currentCharge']
 	desiredCharge = vehicle['desiredCharge']
 	departureTime = vehicle['departureTime']
