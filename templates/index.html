@@ -12,9 +12,9 @@
 	<form method="POST" action="/addVehicle">
 	    Add a Vehicle:<br>
 		<input type="text" placeholder = "Vehicle #" name="vehicleNo" required /><br>
-		<input type="text" placeholder = "Current Charge (#%)" name="currentCharge"/><br>
+		<input type="number" placeholder = "Current Charge (#%)" name="currentCharge"/><br>
 		<input type="text" placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
-		<input type="text" placeholder = "Departure Time (MM/DD/YYYY HH:MM)" name="departureTime"/><br>
+		<input type="datetime-local" placeholder = "Departure Time (MM/DD/YYYY HH:MM)" name="departureTime"/><br>
 		<input type="text" placeholder = "NewStatus {Arrived / Charging}" name="newStatus"/><br>
 		<input type="submit">
   	</form>
