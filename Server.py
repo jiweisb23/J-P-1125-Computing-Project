@@ -28,6 +28,9 @@ mysql.init_app(app)
 def index():
 	return render_template('index.html')
 
+
+
+
 #ToDo: Create SQL Table, create HTML? See https://github.com/onexi/threetiers/blob/main/web/templates/index.html
 #ToDo: Typecast all vars?
 #ToDo: do type checking on form
@@ -82,6 +85,9 @@ def GetVehicles():
 		print(solve(GetVehicles))
 		#return str(GetVehicles)
 		return render_template('GetVehicles.html', list=GetVehicles) #render_template('GetVehicles.html', list=GetVehicles)
+
+
+
 
 
 
