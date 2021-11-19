@@ -39,7 +39,7 @@ def optimizer():
         #L3: 25, 50, 100, 150, 200, 350
 
     # Van characteristics
-    num_vans = 25 #total number of EVs that need to be charged during charging period
+    num_vans = 5 #total number of EVs that need to be charged during charging period
     battery_energy_capacity = 150  #battery energy capacity for the vans [kWh]
     soc_intial_min = 0.461
     soc_intial_mean= 0.666
@@ -170,6 +170,7 @@ def optimizer():
     #set runtime
     #m.Params.timeLimit = 60 * 1 #[mins]
 
+    print('we made it to the solver')
     status = prob.solve()
     print(p.value(m.objective))
 
