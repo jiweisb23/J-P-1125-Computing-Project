@@ -35,6 +35,7 @@ def addVehicle():
 	vehicle = request.form
 	vehicleNo = vehicle['vehicleNo']
 	currentTime =  str(datetime.now())
+	print(currentTime)
 	currentCharge = vehicle['currentCharge']
 	desiredCharge = vehicle['desiredCharge']
 	departureTime = vehicle['departureTime']
