@@ -16,7 +16,11 @@
 		<input type="number" max = 100 min = 0 size = 40 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
 		<input type="number" max = 100 min = 0 size = 40 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
 		<input type="datetime-local" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM:SS)" name="departureTime"/><br>
-		<input type="text" size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus" required="Arrived|Charging" /><br>
+		<input type="text" size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus" required list="l1" /><br>
+		    <datalist id="l1">
+	      		<option>Arrived</option>
+	      		<option>Charging</option>
+    		</datalist>
 		<input type="submit">
   	</form>
 
