@@ -7,10 +7,17 @@ import math
 from pulp import *
 
 
+from datetime import datetime
+from datetime import timedelta
+import pytz
+import sys
+
 
 
 def optimizer():
     print("Optimizing1!")
+
+    systime = datetime.now()
 
     m = p.LpProblem('Charging', p.LpMinimize)
     np.random.seed(2)
@@ -32,8 +39,11 @@ def optimizer():
     ## Site characteristics 
     site_power_capacity = 100000  #the site power capacity [kW]
         #common: 45, 75, 112.5, 150, 225, 300, 500, 750, and 1,000 kVA
-    charging_period = 10*60 #total time available for charging all vans (8pm-6am) [mins]
+
+    rate_divisor = 2
+    charging_period = 20*rate_divisor #total time available for charging all vans (8pm-6am) [mins]
     simulation_time = charging_period + 2
+    
 
     ## EVSE characteristics
     #manually input evse:
@@ -66,7 +76,8 @@ def optimizer():
     expected_energy_cost = expected_energy_amount*(1/10*energy_rate_on+9/10*energy_rate_off)
     print(expected_energy_amount,expected_energy_cost)
     #calculate min evse:
-    num_evse = int(math.ceil(expected_energy_amount/(charging_period/60)/charging_rate))+2
+    num_evse = int(math.ceil(expected_energy_amount/(charging_period/rate_divisor)/charging_rate))+2
+    print("num_evse: ", num_evse)
 
     # Initialize lists to keep track of charging progress
     battery_energy_current = {} #current battery energy at time t [kWh]
@@ -84,6 +95,23 @@ def optimizer():
     fully_charged = {} #binary: van i has been fully charged at time t
     peak = p.LpVariable('peak', lowBound = 0) #keep track of the peak over the charging period (using makespan)
 
+
+    #charging_now = p.LpVariable.dicts(name="charging_now",
+    #                 indexs=(range(num_vans), range(1, simulation_time)),#, range(M), range(L)),     
+                     #lowBound=lower_bound_X,
+                     #upBound=upper_bound_X,
+    #                 cat=LpBinary)
+
+
+    #fully_charged = p.LpVariable.dicts(name="fully_charged",
+    #                 indexs=(range(num_vans), range(1, simulation_time)),# range(M), range(L)),     
+                     #lowBound=lower_bound_X,
+                     #upBound=upper_bound_X,
+    #                 cat=LpBinary)
+
+    print("We defined dicts @ ", datetime.now() - systime)
+
+
     for i in range(0, num_vans, 1):  #for each van i
         battery_energy_current[i, 0] = battery_energy_initial[i] #intialize
         charging_now[(i, 0)] = 0  #none are charging before charging period
@@ -92,15 +120,17 @@ def optimizer():
         for t in range(1, simulation_time, 1):  #for each time t (hr)
 
             van_time_name = "van-" + str(i) + "-time-" + str(t)  # create a name for the decision variable
-            charging_now[(i, t)] = p.LpVariable('van_time_name',cat='Binary')  #binary: is van i charging at time t? 1 if van i is charging, 0 if not
+            charging_now[i, t] = p.LpVariable('van_time_name ' + str(i) +", "+ str(t),cat='Binary')  #binary: is van i charging at time t? 1 if van i is charging, 0 if not
 
             # Is charging for van i complete
             van_charge_complete_name = "van" + str(i) + "-charge_complete-" + str(t)  # create a name for the decision variable
-            fully_charged[(i, t)] = p.LpVariable('van_charge_complete_name',cat='Binary')  # 1 if charging is complete, 0 if not
+            fully_charged[i, t] = p.LpVariable('van_charge_complete_name ' + str(i) +", "+ str(t),cat='Binary')  # 1 if charging is complete, 0 if not
 
     ## =====================
     ## CONSTRAINTS
     ## =====================
+
+    print("Begin Constraints @ ", datetime.now() - systime)
 
     energy_charge_at_time_t[0]=0
     # For all t constraints
@@ -113,21 +143,18 @@ def optimizer():
             energy_charge_at_time_t[t] = energy_rate_on
         else:
             energy_charge_at_time_t[t] = energy_rate_off
-'''
-        for i in range(0, num_vans, 1):  # For each van i
-            num_vans_charging = num_vans_charging + charging_now[(i, t)]
-            total_power_draw = total_power_draw + charging_now[(i, t)] * charging_rate
+
+
+
         # Constraint: the total number of charging vans cannot exceed the total number of EV chargers on site at all times
-        m += num_vans_charging <= num_evse
+        m += sum(charging_now[i, t] for i in range(0,num_vans,1)) <= num_evse
         # Constraint: the total power draw of vans charging cannot exceed the site transformer capacity
-        m += total_power_draw <= site_power_capacity
-'''
-        # Constraint: the total number of charging vans cannot exceed the total number of EV chargers on site at all times
-        m += sum(charging_now[(i,t)] for i in range(0,num_vans,1)) <= num_evse
-        # Constraint: the total power draw of vans charging cannot exceed the site transformer capacity
-        m += sum((charging_now[(i,t)] * charging_rate) for i in range(0,num_vans,1)) <= site_power_capacity
+        m += sum((charging_now[i, t] * charging_rate) for i in range(0,num_vans,1)) <= site_power_capacity
         # Constraint: The peak makespan has to be bigger than the number of vans charging (aka
-        m += peak >= sum((charging_now[(i, t)*(charging_rate/60)) for i in range(0, num_vans, 1))
+        m += peak >= sum((charging_now[i, t]*(charging_rate/rate_divisor)) for i in range(0, num_vans, 1))
+
+
+    print("Next set of constraints @ ", datetime.now() - systime)
 
     # For all i constraints
     for i in range(0, num_vans, 1):  # For each van i
@@ -135,166 +162,47 @@ def optimizer():
 
             #the battery energy increases by charging rate
             #Constraint: Dont exceed the max charge (aka battery capacity)
-            m += battery_energy_current[i, 0]+sum(charging_now[(i,t2)]*(charging_rate/60) for t2 in range(1,t+1)) <= battery_energy_final_max
+            m += battery_energy_current[i, 0]+sum(charging_now[i,t2]*(charging_rate/rate_divisor) for t2 in range(1,t+1)) <= battery_energy_final_max
 
-            '''
-            #the battery energy increases by charging rate
-            battery_energy_current[i, t] = battery_energy_current[i, t - 1] + charging_now[(i, t)] * (charging_rate/60)
-            # Constraint: Dont exceed the max charge (aka battery capacity)
-            m += (battery_energy_current[i, t]) <= battery_energy_final_max
-            '''
             # Activation Constraints:
             # (Fully charged can only be 1 if charge is at least minimum threshold)
-            m += fully_charged[(i, t)] <= (battery_energy_current[i, 0]+sum(charging_now[(i,t2)]*(charging_rate/60) for t2 in range(1,t+1))) / battery_energy_final_min
+            m += fully_charged[i, t] <= (battery_energy_current[i, 0]+sum(charging_now[i,t2]*(charging_rate/rate_divisor) for t2 in range(1,t+1))) / battery_energy_final_min
 
             # fully_charged_at_t[i, t] >= (Charge[i, t] + charging_rate / 10) / max_charge – 1
-            # m.addConstr(fully_charged[(i, t)] >= battery_energy_current[(i, t - 1)] / battery_energy_final_min + 0.00001 - 1)
+            # m.addConstr(fully_charged[i, t] >= battery_energy_current[(i, t - 1)] / battery_energy_final_min + 0.00001 - 1)
 
             # Constraint: If you’re charging at time t-1, then you’re either charging at time t or you’re fully charged at time t
-            m += charging_now[(i, t - 1)] <= charging_now[(i, t)] + fully_charged[(i, t)]
+            m += charging_now[i, t - 1] <= charging_now[i, t] + fully_charged[i, t]
 
         # Constraint: All vehicles must be fully charged at the end of the simulation
-        m += fully_charged[(i, simulation_time - 1)] == 1
+        m += fully_charged[(i, simulation_time-1)] == 1
 
     ## =====================
     ## OBJECTIVE FUNCTION & RUNTIME
     ## =====================
-'''
-    # Terms for the peak makespan
-    num_vans_charging_current[t] = num_vans_charging
-    total_power_draw_current[t] = total_power_draw
-    energy_cost = energy_cost + total_power_draw*(1/60)*energy_charge_at_time_t[t]
-    #Constraint: set a lower bound for the energy cost (warm start for faster runtime)
-    #m += total_electricity_cost >= expected_energy_cost
-'''
+
+    print("Set objective @ ", datetime.now() - systime)
+
     #set objective
-    m += sum(sum((charging_now[(i, t)*(charging_rate/60)*energy_charge_at_time_t[t]) for i in range(0, num_vans, 1)) for t in range(1,simulation_time,1)) + peak*demand_rate
-    #set runtime
-    #m.Params.timeLimit = 60 * 1 #[mins]
+    m += sum(sum((charging_now[i, t]*(charging_rate/rate_divisor)*energy_charge_at_time_t[t]) for i in range(0, num_vans, 1)) for t in range(1,simulation_time,1)) + peak*demand_rate
 
-    print('we made it to the solver')
-    status = m.solve()
+
+    #print(m)
+    print('we made it to the solver @', datetime.now() - systime)
+    status = m.solve(p.COIN(maxSeconds=60*5))
+    print(p.LpStatus[status])
+    print('Solver finished @', datetime.now() - systime)
+    print("Peak demand rate: ",p.value(peak)*demand_rate)
     print(p.value(m.objective))
-
-    '''
-    ## =====================
-    ## OUTPUT FILES
-    ## =====================
-
-        print('we made it to the solver')
-        status = m.solve() #solver
-        print(p.LpStatus[status]) #the solution status 
-        print(p.value(m.objective)) #print the final solution
-    xlsx_title = "output-num_evse-"+str(num_evse)+"-num_vans-"+str(num_vans)+"-charging_time_limit-"+str(simulation_time-2)+".xlsx"
-
-    # =================Fill the Matrix into Proper form for outputs
-
-    # Van Charge Over Time
-    van_charge_over_time = []
-    time_range = ["van", *range(0, simulation_time, 1)]
-    van_charge_over_time.append(time_range)
-    for i in range(0, num_vans, 1):  # For each van i
-        van_results = [i]  # Intialize with the van indicator
-        van_results.append(battery_energy_current[i, 0])  # Append the intial state
-        for t in range(2, simulation_time + 1, 1):  # for each time t
-            new_charge = van_results[t - 1] + (charging_now[(i, t - 1)].x) * (charging_rate/60)
-            van_results.append(new_charge)
-        van_charge_over_time.append(van_results)
-
-    # PowerDrawOverTime
-    power_draw_over_time = []
-    power_draw_over_time.append(time_range)
-    for i in range(0, num_vans, 1):  # For each van i
-        power_results = [i]  # Intialize with the van indicator
-        power_results.append(0)  # Append the intial state
-        for t in range(2, simulation_time + 1, 1):  # for each time t
-            power_draw = (charging_now[(i, t - 1)].x) * charging_rate
-            power_results.append(power_draw)
-        power_draw_over_time.append(power_results)
-
-    power_draw_sum = ['sum', 0]
-    for t in range(2, simulation_time + 1, 1):  # for each time t
-        col_sum = 0
-        for i in range(0, num_vans, 1):  # For each van i
-            col_sum = col_sum + (charging_now[(i, t - 1)].x) * charging_rate
-        power_draw_sum.append(col_sum)
-    power_draw_over_time.append(power_draw_sum)
-
-    #Output to a file
-    with xlsxwriter.Workbook(xlsx_title) as workbook:
-        worksheet1 = workbook.add_worksheet('van_charge_over_time')
-
-        for row_num, data in enumerate(van_charge_over_time):
-            worksheet1.write_row(row_num, 0, data)
-
-        worksheet2 = workbook.add_worksheet('power_draw_over_time')
-        for row_num, data in enumerate(power_draw_over_time):
-            worksheet2.write_row(row_num, 0, data)
-
-        worksheet3 = workbook.add_worksheet('cost')
-        cost=[[peak.x*demand_rate],[m.objVal-peak.x*demand_rate],[m.objVal]]
-        print(cost)
-        for row_num, data in enumerate(cost):
-            worksheet3.write_row(row_num, 0, data)
-
-    #Creating the relevant plots
-    #Plot of power draw over time
-    plt.figure()
-    plt.plot(time_range[1:], power_draw_sum[1:])
-    plt.xlim([1, simulation_time -2])
-    plt.axes().set_xlabel("time (minutes)")
-    plt.axes().set_ylabel(" Power (kW) ")
-    plt.grid(which='major', axis='both')
-
-    #Plot the individual van battery energy over time
-    plt.figure()
-    time_plot = [*range(0, simulation_time, 1)]
-    counter = 0
-    for row in van_charge_over_time:
-        if counter >0:
-            plt.plot(time_plot, row[1:], marker='o',label=str(counter-1))
-        counter = counter +1
-    plt.legend()
-    plt.axes().set_xlabel("time (minutes)")
-    plt.axes().set_ylabel(" Battery Energy (kWh) ")
-    plt.grid(which='major', axis='both')
-    plt.show()
-    '''
-
     return p.value(m.objective) 
 
-#optimizer()
+
+
+optimizer()
 
 if __name__ == "__optimizer__":
 
     print("Optimizing2!")
 
 
-"""
-# after optimizing, write to output file
-with open('power_draw_over_tme.csv', mode='w', newline='') as f:
-    writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
-    for i in range(0, num_vans, 1):  # For each van i
-        ans_list = [i] # first column is van id
-        for t in range(1, simulation_time, 1):  # for each time t
-            ans_list += [charging_now[(i, t)].x] #times charging rate
-        # write row to file
-        writer.writerow(ans_list)
 
-# after optimizing, write to output file
-with open('charging_complete_over_time.csv', mode='w', newline='') as f:
-    writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
-    for i in range(0, num_vans, 1):  # For each van i
-        ans_list2 = [i] # first column is van id
-        for t in range(1, simulation_time, 1):  # for each time t
-            ans_list2 += [fully_charged[(i, t)].x]
-        # write row to file
-        writer.writerow(ans_list2)
-
-
-with open("out.csv", "w", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerows(ans)
-
-
-"""
