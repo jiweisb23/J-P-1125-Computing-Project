@@ -12,14 +12,6 @@ from pulp import *
 def optimizer():
     print("Optimizing1!")
 
-    
-    
-
-
-if __name__ == "__optimizer__":
-
-    print("Optimizing2!")
-
     m = p.LpProblem('Charging', p.LpMinimize)
     np.random.seed(2)
 
@@ -267,9 +259,13 @@ if __name__ == "__optimizer__":
     plt.show()
     '''
 
-    #return p.value(m.objective) 
+    return p.value(m.objective) 
 
 #optimizer()
+
+if __name__ == "__optimizer__":
+
+    print("Optimizing2!")
 
 
 """
