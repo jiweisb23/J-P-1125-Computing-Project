@@ -10,10 +10,11 @@ from pulp import *
 
 
 def optimizer():
-        print("Optimizing!")
+    
+    print("Optimizing!")
 
 
-        if __name__ == "__main__":
+    if __name__ == "__main__":
 
         m = p.LpProblem('Charging', p.LpMinimize)
         np.random.seed(2)
