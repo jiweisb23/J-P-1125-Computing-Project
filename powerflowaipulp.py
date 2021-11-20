@@ -5,6 +5,7 @@ import xlsxwriter
 import matplotlib.pyplot as plt
 import math
 from pulp import *
+import psutil
 
 
 from datetime import datetime
@@ -63,8 +64,9 @@ def optimizer():
     battery_energy_initial_min = soc_intial_min * battery_energy_capacity #initial battery energy [kWh]
     battery_energy_initial_mean = soc_intial_mean * battery_energy_capacity #initial battery energy [kWh]
     battery_energy_initial_max = soc_intial_max * battery_energy_capacity #initial battery energy [kWh]
-    battery_energy_final_min = soc_final_min * battery_energy_capacity #final battery energy [kWh]
-    battery_energy_final_max = soc_final_max * battery_energy_capacity #final battery energy [kWh]
+    battery_energy_final_min = 144#soc_final_min * battery_energy_capacity #final battery energy [kWh]
+    battery_energy_final_max = 151#soc_final_max * battery_energy_capacity #final battery energy [kWh]
+    print("Changed the energy final values because they should be in kw not % it seems, else it's the fidelity of the step up to charge that's causing infeasibility")
 
     battery_energy_initial = np.random.triangular(battery_energy_initial_min,
                                                 battery_energy_initial_mean,
@@ -189,8 +191,11 @@ def optimizer():
 
     #print(m)
     print('we made it to the solver @', datetime.now() - systime)
+    print('The CPU usage is: ', psutil.cpu_percent(4))
     status = m.solve(p.COIN(maxSeconds=60*5))
+    print('The CPU usage is: ', psutil.cpu_percent(4))
     print(p.LpStatus[status])
+    print('The CPU usage is: ', psutil.cpu_percent(4))
     print('Solver finished @', datetime.now() - systime)
     print("Peak demand rate: ",p.value(peak)*demand_rate)
     print(p.value(m.objective))
@@ -198,7 +203,7 @@ def optimizer():
 
 
 
-#optimizer()
+optimizer()
 
 if __name__ == "__optimizer__":
 
