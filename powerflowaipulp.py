@@ -192,7 +192,7 @@ def optimizer():
     #print(m)
     print('we made it to the solver @', datetime.now() - systime)
     print('The CPU usage is: ', psutil.cpu_percent(4))
-    status = m.solve(p.COIN(maxSeconds=60*5))
+    status = m.solve(msg=1, p.COIN(maxSeconds=60*5))#
     print('The CPU usage is: ', psutil.cpu_percent(4))
     print(p.LpStatus[status])
     print('The CPU usage is: ', psutil.cpu_percent(4))
