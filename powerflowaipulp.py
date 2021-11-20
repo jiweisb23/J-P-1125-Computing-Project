@@ -14,8 +14,8 @@ def optimizer():
     
 
 
-    if __name__ == "__main__":
-        
+    if __name__ == "__optimizer__":
+
         print("Optimizing!")
 
         m = p.LpProblem('Charging', p.LpMinimize)
