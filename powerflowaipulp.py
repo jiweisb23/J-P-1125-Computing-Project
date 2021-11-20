@@ -42,7 +42,7 @@ def optimizer():
         #common: 45, 75, 112.5, 150, 225, 300, 500, 750, and 1,000 kVA
 
     rate_divisor = 2
-    charging_period = 5*rate_divisor #total time available for charging all vans (8pm-6am) [mins]
+    charging_period = 10*rate_divisor #total time available for charging all vans (8pm-6am) [mins]
     simulation_time = charging_period + 2
     
 
@@ -54,7 +54,7 @@ def optimizer():
         #L3: 25, 50, 100, 150, 200, 350
 
     # Van characteristics
-    num_vans = 2 #total number of EVs that need to be charged during charging period
+    num_vans = 5 #total number of EVs that need to be charged during charging period
     battery_energy_capacity = 150  #battery energy capacity for the vans [kWh]
     soc_intial_min = 0.461
     soc_intial_mean= 0.666
