@@ -194,7 +194,10 @@ def optimizer():
     print('The CPU usage is: ', psutil.cpu_percent(4))
     #
     print(p.listSolvers())
+
+    #ToDo: Warm Start: https://coin-or.github.io/pulp/guides/how_to_mip_start.html
     status = m.solve(PULP_CBC_CMD(msg=1))#, p.COIN(maxSeconds=60*5)
+    #Debugging: https://coin-or.github.io/pulp/guides/how_to_debug.html
 
     #status = p.solvers.actualSolve(m)
     print('The CPU usage is: ', psutil.cpu_percent(4))
