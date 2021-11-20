@@ -83,7 +83,7 @@ def GetVehicles():
 	if response > 0:
 		GetVehicles = cursor.fetchall()
 		
-		print(solve(GetVehicles))
+		#print(solve(GetVehicles))
 		#return str(GetVehicles)
 		return render_template('GetVehicles.html', list=GetVehicles) #render_template('GetVehicles.html', list=GetVehicles)
 
@@ -95,7 +95,7 @@ def GetVehicles():
 
 
 #ToDo: Replace with Pulp Version of Peter's optimization project code 
-def solve(dbtable):
+def solve():
 	x = pulp.LpVariable("x", 0, int(dbtable[0][0]))
 	y = pulp.LpVariable("y", 0, int(dbtable[1][0]))
 
@@ -121,7 +121,7 @@ def solve(dbtable):
 
 @app.route('/optimize/')
 def optimize():
-	#x = solve()
+	x = solve()
 	x = optimizer()
 	return str(x)
 
