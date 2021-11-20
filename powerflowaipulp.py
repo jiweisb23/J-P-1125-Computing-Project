@@ -113,64 +113,62 @@ def optimizer():
             energy_charge_at_time_t[t] = energy_rate_on
         else:
             energy_charge_at_time_t[t] = energy_rate_off
-
+'''
         for i in range(0, num_vans, 1):  # For each van i
             num_vans_charging = num_vans_charging + charging_now[(i, t)]
             total_power_draw = total_power_draw + charging_now[(i, t)] * charging_rate
-
         # Constraint: the total number of charging vans cannot exceed the total number of EV chargers on site at all times
         m += num_vans_charging <= num_evse
-
         # Constraint: the total power draw of vans charging cannot exceed the site transformer capacity
         m += total_power_draw <= site_power_capacity
-
-        # Terms for the peak makespan
-        num_vans_charging_current[t] = num_vans_charging
-        total_power_draw_current[t] = total_power_draw
-
-        energy_cost = energy_cost + total_power_draw*(1/60)*energy_charge_at_time_t[t]
+'''
+        # Constraint: the total number of charging vans cannot exceed the total number of EV chargers on site at all times
+        m += sum(charging_now[(i,t)] for i in range(0,num_vans,1)) <= num_evse
+        # Constraint: the total power draw of vans charging cannot exceed the site transformer capacity
+        m += sum((charging_now[(i,t)] * charging_rate) for i in range(0,num_vans,1)) <= site_power_capacity
+        # Constraint: The peak makespan has to be bigger than the number of vans charging (aka
+        m += peak >= sum((charging_now[(i, t)*(charging_rate/60)) for i in range(0, num_vans, 1))
 
     # For all i constraints
     for i in range(0, num_vans, 1):  # For each van i
         for t in range(1, simulation_time, 1):  # for each time t
 
             #the battery energy increases by charging rate
+            #Constraint: Dont exceed the max charge (aka battery capacity)
+            m += battery_energy_current[i, 0]+sum(charging_now[(i,t2)]*(charging_rate/60) for t2 in range(1,t+1)) <= battery_energy_final_max
+
+            '''
+            #the battery energy increases by charging rate
             battery_energy_current[i, t] = battery_energy_current[i, t - 1] + charging_now[(i, t)] * (charging_rate/60)
-
             # Constraint: Dont exceed the max charge (aka battery capacity)
-            m += battery_energy_current[i, t] <= battery_energy_final_max
-
+            m += (battery_energy_current[i, t]) <= battery_energy_final_max
+            '''
             # Activation Constraints:
             # (Fully charged can only be 1 if charge is at least minimum threshold)
-            m += fully_charged[(i, t)] <= battery_energy_current[(i, t - 1)] / battery_energy_final_min
+            m += fully_charged[(i, t)] <= (battery_energy_current[i, 0]+sum(charging_now[(i,t2)]*(charging_rate/60) for t2 in range(1,t+1))) / battery_energy_final_min
 
             # fully_charged_at_t[i, t] >= (Charge[i, t] + charging_rate / 10) / max_charge – 1
-        # m.addConstr(fully_charged[(i, t)] >= battery_energy_current[(i, t - 1)] / battery_energy_final_min + 0.00001 - 1)
+            # m.addConstr(fully_charged[(i, t)] >= battery_energy_current[(i, t - 1)] / battery_energy_final_min + 0.00001 - 1)
 
             # Constraint: If you’re charging at time t-1, then you’re either charging at time t or you’re fully charged at time t
             m += charging_now[(i, t - 1)] <= charging_now[(i, t)] + fully_charged[(i, t)]
 
         # Constraint: All vehicles must be fully charged at the end of the simulation
-        m += fully_charged[(i, t)] == 1
-
-        
-    for t in range(1, simulation_time - 1, 1):  # for each time t
-        # Constraint: The peak makespan has to be bigger than the number of vans charging (aka
-        m += peak >= total_power_draw_current[t]
-
-        # want peak to occurr earlier the shift rather than later
-        #m.addConstr(total_power_draw_current[t] >= total_power_draw_current[t+1]) #optinal constraint  for smoothness
+        m += fully_charged[(i, simulation_time - 1)] == 1
 
     ## =====================
     ## OBJECTIVE FUNCTION & RUNTIME
     ## =====================
-
-    total_electricity_cost = energy_cost + peak*demand_rate
-
+'''
+    # Terms for the peak makespan
+    num_vans_charging_current[t] = num_vans_charging
+    total_power_draw_current[t] = total_power_draw
+    energy_cost = energy_cost + total_power_draw*(1/60)*energy_charge_at_time_t[t]
     #Constraint: set a lower bound for the energy cost (warm start for faster runtime)
-    m += total_electricity_cost >= expected_energy_cost
+    #m += total_electricity_cost >= expected_energy_cost
+'''
     #set objective
-    m += total_electricity_cost
+    m += sum(sum((charging_now[(i, t)*(charging_rate/60)*energy_charge_at_time_t[t]) for i in range(0, num_vans, 1)) for t in range(1,simulation_time,1)) + peak*demand_rate
     #set runtime
     #m.Params.timeLimit = 60 * 1 #[mins]
 
