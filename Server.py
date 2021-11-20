@@ -5,7 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 import pytz
 import sys
-from powerflowaipulp import optimizer
+import optimizer
 app = Flask(__name__)
 
 #See this to kill: https://stackoverflow.com/questions/4465959/python-errno-98-address-already-in-use
