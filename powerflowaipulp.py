@@ -207,7 +207,7 @@ def optimizer():
 
 
 
-optimizer()
+#optimizer()
 
 if __name__ == "__optimizer__":
 
