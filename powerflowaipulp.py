@@ -178,8 +178,9 @@ def optimizer():
         #m.Params.timeLimit = 60 * 1 #[mins]
 
         print('we made it to the solver')
-        status = m.solve()
-        print(p.value(m.objective))
+        status = m.solve() #solver
+        print(p.LpStatus[status]) #the solution status 
+        print(p.value(m.objective)) #print the final solution
 
         '''
         ## =====================
