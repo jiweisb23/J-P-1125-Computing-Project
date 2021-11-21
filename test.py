@@ -23,7 +23,7 @@ x = sum(sum(i for i in range(1,10)) for j in range(1,10))
 print(x)
 
 '''
-print(datetime.now())
+print(datetime.now() - timedelta(hours=5))
 print(datetime(2021, 11, 21, 9, 0))
 
 if ( datetime.now() > datetime(2021, 11, 21, 9, 0)  ):
