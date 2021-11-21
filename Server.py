@@ -101,7 +101,7 @@ def GetVehicles():
 
 def getVehiclesUnwrapped():
 	cursor = mysql.get_db().cursor()
-	response = cursor.execute("SELECT * FROM Vehicles")
+	response = cursor.execute("SELECT * FROM Vehicles WHERE recordStatus=%s", ('active'))
 	html = ''
 	print(response, file=sys.stderr)
 	d = {}
