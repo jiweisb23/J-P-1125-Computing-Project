@@ -288,7 +288,7 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
         for t in range(1, simulation_time, 1): 
             if p.value(charging_now[v, t]) == 1:
                 min_t = min(min_t, t)
-        vehicles[v]['recommendedChargeTime'] = (datetime.now()-timedelta(hours=5)) + timedelta(hours = min_t/rate_divisor )
+        vehicles[v]['recommendedChargeTime'] = (datetime.now()-timedelta(hours=5)) + timedelta(hours = (min_t-1)/rate_divisor )
         vehicles[v]['currentCharge'] = vehicles[v]['battery_energy_current'] / battery_energy_capacity * 100
         vehicles[v]['desiredCharge'] = vehicles[v]['desiredCharge'] * 100
         vehicles[v]['departureTime'] = vehicles[v]['departureTime'] + timedelta(hours = vehicles[v]['pushDeparture'])
