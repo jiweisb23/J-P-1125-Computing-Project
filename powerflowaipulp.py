@@ -24,10 +24,10 @@ def readVehicles(db):
         if r[9] == 'active':
             v = r[0]
             vehicles[v]={}
-            vehicles[v]['last'] = datetime.strptime(r[1], '%Y-%m-%d %H:%M')
+            #vehicles[v]['last'] = datetime.strptime(r[1], '%Y-%m-%d %H:%M')
             vehicles[v]['currentCharge'] = r[2]
             vehicles[v]['desiredCharge'] = r[3]
-            vehicles[v]['departureTime'] = datetime.strptime(r[4], '%Y-%m-%d %H:%M')
+            #vehicles[v]['departureTime'] = datetime.strptime(r[4], '%Y-%m-%d %H:%M')
             vehicles[v]['newStatus'] = r[5]
             vehicles[v]['lastChargingStatus'] = r[6]
             vehicles[v]['recommendedChargeTime'] = r[7]
