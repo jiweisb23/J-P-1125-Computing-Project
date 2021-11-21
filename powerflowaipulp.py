@@ -16,7 +16,6 @@ import sys
 
 
 
-v = datetime.strptime(t_, datefmt )
 
 
 def readVehicles(db):
