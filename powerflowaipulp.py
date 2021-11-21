@@ -15,7 +15,18 @@ import sys
 
 
 
-def optimizer():
+readVehicles()
+
+
+def readVehicles(db):
+    for i in db:
+        print(i)
+
+
+
+
+
+def optimizer(vehicles):
     print("Optimizing1!")
 
     systime = datetime.now()
