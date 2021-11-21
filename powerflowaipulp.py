@@ -30,7 +30,8 @@ def readVehicles(db):
             vehicles[v]['currentTime'] = datetime.strptime(dt, datefmt )
             vehicles[v]['currentCharge'] = int(float(r[2]))/100.
             vehicles[v]['desiredCharge'] = int(float(r[3]))/100.
-            vehicles[v]['departureTime'] = datetime.strptime(r[4], datefmt)
+            dt = r[4].split(":")[0] + ':' + r[4].split(":")[1]
+            vehicles[v]['departureTime'] = datetime.strptime(dt, datefmt)
             vehicles[v]['newStatus'] = r[5]
             vehicles[v]['lastChargingStatus'] = r[6]
             vehicles[v]['recommendedChargeTime'] = r[7]
