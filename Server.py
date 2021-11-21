@@ -105,7 +105,7 @@ def getVehiclesUnwrapped():
 @app.route('/optimize/')
 def optimize():
 	res = optimizer(getVehiclesUnwrapped())
-	show = 'Cost= ' + res[0]
+	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
 	for v in vehicles:
 		addVehicleUnwrapped(vehicles[v])
