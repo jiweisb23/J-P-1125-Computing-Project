@@ -90,12 +90,12 @@ def optimizer(vehicles):
     for v in vehicles:
         
         #Find & Store how long we have until departure
-        hoursToDeparture =  (datetime.now()-timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
+        hoursToDeparture =  (datetime.now()+timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
         #Find & Store how much we've charged arleady, calculate starting point
         if vehicles[v]['lastChargingStatus'] != None or vehicles[v]['newStatus'] == 'Charging':
-            vehicles[v]['hoursCharging'] = (datetime.now()-timedelta(hours=5) - vehicles[v]['currentTime']).seconds/60/60
+            vehicles[v]['hoursCharging'] = (datetime.now()+timedelta(hours=5) - vehicles[v]['currentTime']).seconds/60/60
         else:
             vehicles[v]['hoursCharging'] = 0
         battery_energy_current[v, 0] = min(battery_energy_capacity, vehicles[v]['currentCharge']*battery_energy_capacity + vehicles[v]['hoursCharging']*(charging_rate/rate_divisor))     #intialize
@@ -107,7 +107,7 @@ def optimizer(vehicles):
 
         #find out how much time we actually need for all desired charges
         pushDeparture = max(vehicleEnergyNeeded / charging_rate - hoursToDeparture,0)
-        vehicles[v]['pushDeparture'] = pushDeparture
+        vehicles[v]['pushDeparture'] = pushDeparture 
 
         maxHours = max(hoursToDeparture + pushDeparture, maxHours)
 
@@ -296,7 +296,7 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
     
 
 
-print(optimizer(test_dict))
+#print(optimizer(test_dict))
 
 if __name__ == "__optimizer__":
 
