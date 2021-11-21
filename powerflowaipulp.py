@@ -94,10 +94,6 @@ def optimizer(vehicles):
             hoursToDeparture =   (vehicles[v]['departureTime'] - (datetime.now()-timedelta(hours=5))).seconds/60/60
         else:
             hoursToDeparture = 0 
-        print('TIME DEBUG Vehicle: ' + v)
-        print(datetime.now())
-        print(vehicles[v]['departureTime'])
-        print(hoursToDeparture)
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
         #Find & Store how much we've charged arleady, calculate starting point
@@ -292,7 +288,7 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
         for t in range(1, simulation_time, 1): 
             if p.value(charging_now[v, t]) == 1:
                 min_t = min(min_t, t)
-        vehicles[v]['recommendedChargeTime'] = datetime.now() + timedelta(hours = min_t/rate_divisor )
+        vehicles[v]['recommendedChargeTime'] = (datetime.now()-timedelta(hours=5)) + timedelta(hours = min_t/rate_divisor )
         vehicles[v]['currentCharge'] = vehicles[v]['battery_energy_current'] / battery_energy_capacity * 100
         vehicles[v]['desiredCharge'] = vehicles[v]['desiredCharge'] * 100
         vehicles[v]['departureTime'] = vehicles[v]['departureTime'] + timedelta(hours = vehicles[v]['pushDeparture'])
