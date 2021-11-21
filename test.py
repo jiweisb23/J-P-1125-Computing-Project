@@ -24,8 +24,14 @@ print(x)
 
 '''
 print(datetime.now())
+print(datetime(2021, 11, 21, 9, 0))
 
+if ( datetime.now() > datetime(2021, 11, 21, 9, 0)  ):
+	print(( datetime.now() -datetime(2021, 11, 21, 9, 0) ).seconds/60/60 ) 
+else:
+	print("error")
 
+print(datetime.now() -datetime(2021, 11, 21, 9, 0) )
 
 test_dict = {'2': {'last': datetime(2021, 11, 21, 9, 0), 'currentCharge': 15, 'desiredCharge': 90, 'departureTime': datetime(2021, 11, 21, 18, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}, '1': {'last': datetime(2021, 11, 21, 9, 1), 'currentCharge': 10, 'desiredCharge': 90, 'departureTime': datetime(2021, 11, 21, 17, 31), 'newStatus': 'Charging', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
 for v in test_dict:

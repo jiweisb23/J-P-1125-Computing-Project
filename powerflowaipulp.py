@@ -90,7 +90,10 @@ def optimizer(vehicles):
     for v in vehicles:
         
         #Find & Store how long we have until departure
-        hoursToDeparture =  (datetime.now()+timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
+        if (datetime.now()-timedelta(hours=5)) > vehicles[v]['departureTime']: 
+            hoursToDeparture =  (datetime.now()-timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
+        else:
+            hoursToDeparture = 0 
         print('TIME DEBUG Vehicle: ' + v)
         print(datetime.now())
         print(vehicles[v]['departureTime'])
@@ -99,7 +102,7 @@ def optimizer(vehicles):
 
         #Find & Store how much we've charged arleady, calculate starting point
         if vehicles[v]['lastChargingStatus'] =='True' or vehicles[v]['newStatus'] == 'Charging':
-            vehicles[v]['hoursCharging'] = (datetime.now()+timedelta(hours=5) - vehicles[v]['currentTime']).seconds/60/60
+            vehicles[v]['hoursCharging'] = (datetime.now()-timedelta(hours=5) - vehicles[v]['currentTime']).seconds/60/60
         else:
             vehicles[v]['hoursCharging'] = 0
         battery_energy_current[v, 0] = min(battery_energy_capacity, vehicles[v]['currentCharge']*battery_energy_capacity + vehicles[v]['hoursCharging']*(charging_rate/rate_divisor))     #intialize
