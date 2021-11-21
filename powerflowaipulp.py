@@ -16,18 +16,21 @@ import sys
 
 
 
+v = datetime.strptime(t_, datefmt )
 
 
 def readVehicles(db):
     vehicles = {}
+    datefmt = '%Y-%m-%d %H:%M'
     for r in db:
         if r[9] == 'active':
             v = r[0]
             vehicles[v]={}
-            #vehicles[v]['last'] = datetime.strptime(r[1], '%Y-%m-%d %H:%M')
-            vehicles[v]['currentCharge'] = r[2]
-            vehicles[v]['desiredCharge'] = r[3]
-            #vehicles[v]['departureTime'] = datetime.strptime(r[4], '%Y-%m-%d %H:%M')
+            dt = r[1].split(":")[0] + ':' + r[1].split(":")[1]
+            vehicles[v]['last'] = datetime.strptime(dt, datefmt )
+            vehicles[v]['currentCharge'] = int(r[2])
+            vehicles[v]['desiredCharge'] = int(r[3])
+            vehicles[v]['departureTime'] = datetime.strptime(r[4], datefmt)
             vehicles[v]['newStatus'] = r[5]
             vehicles[v]['lastChargingStatus'] = r[6]
             vehicles[v]['recommendedChargeTime'] = r[7]
