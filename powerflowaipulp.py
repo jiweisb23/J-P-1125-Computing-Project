@@ -91,6 +91,10 @@ def optimizer(vehicles):
         
         #Find & Store how long we have until departure
         hoursToDeparture =  (datetime.now()+timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
+        print('TIME DEBUG Vehicle: ' + v)
+        print(datetime.now())
+        print(vehicles[v][departureTime])
+        print(hoursToDeparture)
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
         #Find & Store how much we've charged arleady, calculate starting point
