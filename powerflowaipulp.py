@@ -90,8 +90,8 @@ def optimizer(vehicles):
     for v in vehicles:
         
         #Find & Store how long we have until departure
-        if (datetime.now()-timedelta(hours=5)) > vehicles[v]['departureTime']: 
-            hoursToDeparture =  (datetime.now()-timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
+        if  vehicles[v]['departureTime'] > (datetime.now()-timedelta(hours=5)): 
+            hoursToDeparture =   (vehicles[v]['departureTime'] - (datetime.now()-timedelta(hours=5))).seconds/60/60
         else:
             hoursToDeparture = 0 
         print('TIME DEBUG Vehicle: ' + v)
