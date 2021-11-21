@@ -25,15 +25,20 @@ print(x)
 
 '''
 
-datefmt = '%Y-%m-%d %H:%M'
-t = '2021-11-21 09:00:58.593595'
-t_ = t.split(":")[0] + ':' + t.split(":")[1]
-v = datetime.strptime(t_, datefmt )
-print(v)
 
 
+test_dict = {'2': {'last': datetime(2021, 11, 21, 9, 0), 'currentCharge': 15, 'desiredCharge': 90, 'departureTime': datetime(2021, 11, 21, 18, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}, '1': {'last': datetime(2021, 11, 21, 9, 1), 'currentCharge': 10, 'desiredCharge': 90, 'departureTime': datetime(2021, 11, 21, 17, 31), 'newStatus': 'Charging', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
+for v in test_dict:
+	print(v)
 
 
+s = ''
+for i in range(1,10):
+	s+='i'
+
+print(s)
+
+print(0 + True & True)
 
 if __name__ == "__optimizer__":
 
