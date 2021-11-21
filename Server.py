@@ -93,7 +93,7 @@ def update(v):
 def GetVehicles():
 	d = getVehiclesUnwrapped()
 	if d != {}:
-		return render_template('GetVehicles.html', list=d) #render_template('GetVehicles.html', list=GetVehicles)
+		return render_template('GetVehicles.html', dict=d) #render_template('GetVehicles.html', list=GetVehicles)
 	
 
 
