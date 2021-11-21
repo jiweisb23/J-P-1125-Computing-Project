@@ -15,12 +15,13 @@ import sys
 
 
 
-readVehicles()
+
 
 
 def readVehicles(db):
     for i in db:
-        print(i)
+        for j in i:
+            print(j)
 
 
 
