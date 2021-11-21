@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Power FLow AI</title>
+    <title>Power Flow AI</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">
 
@@ -118,7 +118,33 @@
 
 	</script>
 
-	
+	<script>
+	function XaddVehicle(){
+	   var vehicleNo = document.getElementById('vehicleNo').value;
+	   var currentCharge = document.getElementById('currentCharge').value;
+	   var desiredCharge = document.getElementById('desiredCharge').value;
+	   var departureTime = document.getElementById('departureTime').value;
+	   var newStatus = document.getElementById('newStatus').value;
+	   console.log(vehicleNo);
+	   console.log(currentTime);
+	   console.log(currentCharge);
+	   console.log(desiredCharge);
+	   console.log(departureTime);
+	   console.log(newStatus);
+
+	   var url = `/XaddVehicle?vehicleNo=${vehicleNo}&currentCharge=${currentCharge}&desiredCharge=${desiredCharge}&departureTime=${departureTime}&newStatus=${newStatus}`;
+
+	   superagent
+	       .get(url)
+	       .end(function(err, res){
+	           if (err) {
+	               console.log('err:',err);
+	           } else {
+	               console.log('response:',res.text);
+	           }
+	       });
+	}
+	</script>
 
 	<script>
 	function GetVehicles(){
