@@ -5,7 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 import pytz
 import sys
-from powerflowaipulp import optimizer
+from powerflowaipulp import *#optimizer
 app = Flask(__name__)
 
 #See this to kill: https://stackoverflow.com/questions/4465959/python-errno-98-address-already-in-use
@@ -82,6 +82,7 @@ def GetVehicles():
 
 	if response > 0:
 		GetVehicles = cursor.fetchall()
+		readVehicles(GetVehicles)
 		
 		#print(solve(GetVehicles))
 		#return str(GetVehicles)
