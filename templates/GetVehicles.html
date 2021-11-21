@@ -1,10 +1,7 @@
 <table border = 1>
 
   {% for key, value in d.items() %}
-  {{ key }} : {{ value }}
-    {% for key, value in value %}
-    {{ key }} : {{ value }}
-    {% end for %}              
+  {{ key }} : {{ value }}          
   {% end for %}              
 
   </table>
