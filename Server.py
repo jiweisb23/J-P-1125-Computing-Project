@@ -79,8 +79,7 @@ def update(v):
 @app.route('/GetVehicles/')
 def GetVehicles():
 	d = getVehiclesUnwrapped()
-	empty = {}
-	if d != empty
+	if d != {}:
 		return render_template('GetVehicles.html', list=d) #render_template('GetVehicles.html', list=GetVehicles)
 	
 
