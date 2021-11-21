@@ -288,7 +288,6 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
         vehicles[v]['currentCharge'] = vehicles[v]['battery_energy_current'] / battery_energy_capacity * 100
         vehicles[v]['desiredCharge'] = vehicles[v]['desiredCharge'] * 100
         vehicles[v]['departureTime'] = vehicles[v]['departureTime'] + timedelta(hours = vehicles[v]['pushDeparture'])
-        print("remember to note push departure! and other adds to v dictionary in this code")
         vehicles[v]['lastChargingStatus'] = str(min_t<=1)
     return vehicles
 

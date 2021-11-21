@@ -120,7 +120,9 @@ def optimize():
 	res = optimizer(getVehiclesUnwrapped())
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
+	print('len vehicles: ' + len(vehicles))
 	for v in vehicles:
+		print(v)
 		addVehicleUnwrapped(vehicles[v], False)
 		if vehicles[v]['pushDeparture']>0:
 			show += ' ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
