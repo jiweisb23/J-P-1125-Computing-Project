@@ -93,7 +93,7 @@ def optimizer(vehicles):
         hoursToDeparture =  (datetime.now()+timedelta(hours=5) - vehicles[v]['departureTime']).seconds/60/60
         print('TIME DEBUG Vehicle: ' + v)
         print(datetime.now())
-        print(vehicles[v][departureTime])
+        print(vehicles[v]['departureTime'])
         print(hoursToDeparture)
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
