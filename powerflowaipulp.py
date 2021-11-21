@@ -94,7 +94,7 @@ def optimizer(vehicles):
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
         #Find & Store how much we've charged arleady, calculate starting point
-        if vehicles[v]['lastChargingStatus'] != None or vehicles[v]['newStatus'] == 'Charging':
+        if vehicles[v]['lastChargingStatus'] =='True' or vehicles[v]['newStatus'] == 'Charging':
             vehicles[v]['hoursCharging'] = (datetime.now()+timedelta(hours=5) - vehicles[v]['currentTime']).seconds/60/60
         else:
             vehicles[v]['hoursCharging'] = 0
@@ -177,7 +177,7 @@ def optimizer(vehicles):
 
         
         fully_charged[v, 0] = 0 + battery_energy_current[v, 0] == battery_energy_capacity
-        charging_now[v, 0] = 0 + ((vehicles[v]['lastChargingStatus']!=None or vehicles[v]['newStatus'] == 'Charging' ) and (battery_energy_current[v, 0] < battery_energy_capacity) )
+        charging_now[v, 0] = 0 + ((vehicles[v]['lastChargingStatus']=='True' or vehicles[v]['newStatus'] == 'Charging' ) and (battery_energy_current[v, 0] < battery_energy_capacity) )
         
 
         for t in range(1, simulation_time, 1):  #for each time t (hr)
