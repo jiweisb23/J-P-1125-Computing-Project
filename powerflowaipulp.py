@@ -21,7 +21,7 @@ import sys
 def readVehicles(db):
     vehicles = {}
     for r in db:
-        if r[9] = 'active':
+        if r[9] == 'active':
             v = r[0]
             vehicles[v]={}
             vehicles[v]['last'] = datetime.strptime(r[1], '%Y-%m-%d %H:%M')
