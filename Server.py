@@ -65,7 +65,7 @@ def addVehicleUnwrapped(vehicle, fromHTML):
 		lastChargingStatus = vehicle['lastChargingStatus']
 		recommendedChargeTime = vehicle['recommendedChargeTime']
 		cur = mysql.get_db().cursor()
-		cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, lastChargingStatus, recommendedChargeTime, recordStatus) VALUES(%s, %s, %s, %s, %s, %s,%s, %s, 'active')",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, recommendedChargeTime, recordStatus))
+		cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, lastChargingStatus, recommendedChargeTime, recordStatus) VALUES(%s, %s, %s, %s, %s, %s,%s, %s, 'active')",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, lastChargingStatus, recommendedChargeTime))
 		mysql.get_db().commit()
 
 	
