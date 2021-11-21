@@ -120,7 +120,7 @@ def optimize():
 	res = optimizer(getVehiclesUnwrapped())
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
-	print('len vehicles: ' + len(vehicles))
+	print('len vehicles: ' + str(len(vehicles)))
 	for v in vehicles:
 		print(v)
 		addVehicleUnwrapped(vehicles[v], False)
