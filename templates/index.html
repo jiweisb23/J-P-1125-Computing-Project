@@ -1,29 +1,98 @@
 <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Power FLow AI</title>
 
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">
 
-<head><title>PowerFlowAI</title> 
-    <meta charset=utf-8> </head>
+    
 
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-	
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
 
+    
+    <!-- Custom styles for this template -->
+    <link href="headers.css" rel="stylesheet">
+  </head>
+  <body>
 
-	<form method="POST" action="/addVehicle">
-	    Add a Vehicle:<br>
-		<input type="text" placeholder = "Vehicle #" name="vehicleNo" required /><br>
-		<input type="text" placeholder = "Current Charge (#%)" name="currentCharge"/><br>
-		<input type="text" placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
-		<input type="text" placeholder = "Departure Time (MM/DD/YYYY HH:MM)" name="departureTime"/><br>
-		<input type="text" placeholder = "NewStatus {Arrived / Charging}" name="newStatus"/><br>
-		<input type="submit">
-  	</form>
+<main>
 
-	<button onclick="optimize()">Optimize</button>
-	<button onclick="GetVehicles()">Get Vehicles</button>
-	<div id="output"></div>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <span class="fs-4">Power Flow AI</span>
+      </a>
 
-	</body>
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Dashboard</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+      </ul>
+    </header>
+  </div>
+
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        Current Date and Time is <span id='date-time'></span>
+    </header>
+  </div>
+
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <form method="POST" action="/addVehicle">
+        Add a Vehicle:<br>
+      <input type="text" size = 40 placeholder = "Vehicle #" name="vehicleNo" required /><br>
+      <input type="number" max = 100 min = 0 size = 40 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
+      <input type="number" max = 100 min = 0 size = 40 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
+      <input type="datetime-local" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM:SS)" min="2017-06-01T08:30" max="2030-06-30T16:30" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" name="departureTime" required/><br>
+      <span class="validity"></span>
+      <input type="text" size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus" required pattern="Arrived|Charging"   list="l1" /><br>
+          <datalist id="l1">
+              <option>Arrived</option>
+              <option>Charging</option>
+          </datalist>
+      <input type="submit">
+      </form>
+    </header>
+  </div>
+
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+    <button onclick="optimize()">Optimize</button>
+    <button onclick="GetVehicles()">Get Vehicles</button>
+    <div id="output"></div>
+    </header>
+  </div>
+
+</main>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>
 
 	<script src="https://cdn.jsdelivr.net/npm/superagent"></script>
 	<script>
@@ -49,33 +118,7 @@
 
 	</script>
 
-	<script>
-	function XaddVehicle(){
-	   var vehicleNo = document.getElementById('vehicleNo').value;
-	   var currentCharge = document.getElementById('currentCharge').value;
-	   var desiredCharge = document.getElementById('desiredCharge').value;
-	   var departureTime = document.getElementById('departureTime').value;
-	   var newStatus = document.getElementById('newStatus').value;
-	   console.log(vehicleNo);
-	   console.log(currentTime);
-	   console.log(currentCharge);
-	   console.log(desiredCharge);
-	   console.log(departureTime);
-	   console.log(newStatus);
-
-	   var url = `/XaddVehicle?vehicleNo=${vehicleNo}&currentCharge=${currentCharge}&desiredCharge=${desiredCharge}&departureTime=${departureTime}&newStatus=${newStatus}`;
-
-	   superagent
-	       .get(url)
-	       .end(function(err, res){
-	           if (err) {
-	               console.log('err:',err);
-	           } else {
-	               console.log('response:',res.text);
-	           }
-	       });
-	}
-	</script>
+	
 
 	<script>
 	function GetVehicles(){
@@ -99,8 +142,6 @@
 	}
 
 	</script>
-
-
 
 
 
