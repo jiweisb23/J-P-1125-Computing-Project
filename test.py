@@ -14,7 +14,6 @@ print(str(datetime.now()-timedelta(hours=5)))
 
 
 
-
 for i in range(10):
 
 	print(i)
@@ -24,6 +23,7 @@ x = sum(sum(i for i in range(1,10)) for j in range(1,10))
 print(x)
 
 '''
+print(datetime.now())
 
 
 

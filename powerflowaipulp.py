@@ -39,7 +39,7 @@ def readVehicles(db):
     return vehicles
 
 
-test_dict = {'2': {'currentTime': datetime(2021, 11, 21, 9, 0), 'currentCharge': .15, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 18, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}, '1': {'currentTime': datetime(2021, 11, 21, 9, 1), 'currentCharge': .10, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 17, 31), 'newStatus': 'Charging', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
+test_dict = {'2': {'currentTime': datetime(2021, 11, 21, 9, 0), 'currentCharge': .15, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 13, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}, '1': {'currentTime': datetime(2021, 11, 21, 9, 1), 'currentCharge': .10, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 17, 31), 'newStatus': 'Charging', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
 
 
 
@@ -293,13 +293,10 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
     return vehicles
 
 
-        
+    
 
 
-
-
-
-#optimizer(test_dict)
+print(optimizer(test_dict))
 
 if __name__ == "__optimizer__":
 
