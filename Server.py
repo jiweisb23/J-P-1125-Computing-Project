@@ -39,11 +39,11 @@ def index():
 def addVehicle():
 	# Fetch form data
 	vehicle = request.form
-	addVehicleUnwrapped(vehicle)
+	addVehicleUnwrapped(vehicle, True)
 	return render_template('/index.html') #ToDo: reroute to index.html instead? Note optimize is next step in workflow #return redirect('/GetVehicles')
 
 
-def addVehicleUnwrapped(vehicle):
+def addVehicleUnwrapped(vehicle, fromHTML):
 	vehicleNo = vehicle['vehicleNo']
 	pytz.utc.localize( datetime.utcnow() )  
 	currentTime =  str(datetime.now()-timedelta(hours=5))
@@ -55,10 +55,23 @@ def addVehicleUnwrapped(vehicle):
 
 	update(vehicleNo)
 
+	if fromHTML:
+		cur = mysql.get_db().cursor()
+		cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, recordStatus) VALUES(%s, %s, %s, %s, %s, %s, 'active')",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
+		mysql.get_db().commit()
 
-	cur = mysql.get_db().cursor()
-	cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, recordStatus) VALUES(%s, %s, %s, %s, %s, %s, 'active')",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus))
-	mysql.get_db().commit()
+
+	else:
+		lastChargingStatus = vehicle['lastChargingStatus']
+		recommendedChargeTime = vehicle['recommendedChargeTime']
+		cur = mysql.get_db().cursor()
+		cur.execute("INSERT INTO Vehicles(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, lastChargingStatus, recommendedChargeTime, recordStatus) VALUES(%s, %s, %s, %s, %s, %s,%s, %s, 'active')",(vehicleNo, currentTime, currentCharge, desiredCharge, departureTime, newStatus, recommendedChargeTime, recordStatus))
+		mysql.get_db().commit()
+
+	
+
+
+
 
 
 
@@ -108,7 +121,7 @@ def optimize():
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
 	for v in vehicles:
-		addVehicleUnwrapped(vehicles[v])
+		addVehicleUnwrapped(vehicles[v], False)
 		if vehicles[v]['pushDeparture']>0:
 			show += ' ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
 

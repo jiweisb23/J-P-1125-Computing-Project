@@ -38,6 +38,8 @@ for i in range(1,10):
 
 print(s)
 
+print(not(True))
+
 print(0 + True & True)
 
 if __name__ == "__optimizer__":

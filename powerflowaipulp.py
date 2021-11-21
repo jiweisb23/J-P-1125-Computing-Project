@@ -93,7 +93,7 @@ def optimizer(vehicles):
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
         #Find & Store how much we've charged arleady, calculate starting point
-        if vehicles[v]['lastChargingStatus'] != None:
+        if vehicles[v]['lastChargingStatus'] != None or vehicles[v]['newStatus'] == 'Charging':
             vehicles[v]['hoursCharging'] = (datetime.now()-timedelta(hours=5) - vehciles[v]['currentTime']).seconds/60/60
         else:
             vehicles[v]['hoursCharging'] = 0
@@ -271,21 +271,22 @@ def optimizer(vehicles):
 
     print(p.LpStatus[status], ": ", p.value(m.objective), " ... Peak Demand Rate: ", p.value(peak)*demand_rate)
 
-    res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time)
+    res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity)
     print(res)
 
     return (p.value(m.objective), res)
 
 
 
-def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time):
+def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity):
     for v in vehicles:
         min_t = simulation_time
         for t in range(1, simulation_time, 1): 
             if p.value(charging_now[v, t]) == 1:
                 min_t = min(min_t, t)
         vehicles[v]['recommendedChargeTime'] = datetime.now() + timedelta(hours = min_t/rate_divisor )
-        vehicles[v]['currentCharge'] = vehicles[v]['battery_energy_current']
+        vehicles[v]['currentCharge'] = vehicles[v]['battery_energy_current'] / battery_energy_capacity * 100
+        vehicles[v]['desiredCharge'] = vehicles[v]['desiredCharge'] * 100
         vehicles[v]['departureTime'] = vehicles[v]['departureTime'] + timedelta(hours = vehicles[v]['pushDeparture'])
         print("remember to note push departure! and other adds to v dictionary in this code")
         vehicles[v]['lastChargingStatus'] = str(min_t<=1)
