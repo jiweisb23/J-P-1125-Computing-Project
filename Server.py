@@ -6,7 +6,7 @@ from datetime import timedelta
 import pytz
 import sys
 from powerflowaipulp import *#optimizer
-app = Flask(__name__, static_url_path = '', static_folder = '/static')
+app = Flask(__name__, static_folder = '/static')
 
 #See this to kill: https://stackoverflow.com/questions/4465959/python-errno-98-address-already-in-use
 
