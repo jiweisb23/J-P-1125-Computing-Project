@@ -67,9 +67,9 @@
       <input type="text" value = "1" size = 40 placeholder = "Vehicle #" name="vehicleNo" required /><br>
       <input type="number" value = 0 max = 100 min = 0 size = 40 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
       <input type="number" value = 100 max = 100 min = 0 size = 40 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
-      <input type="datetime-local" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM:SS)" min="2017-06-01T08:30" max="2030-06-30T16:30" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" name="departureTime" required/><br>
+      <input type="datetime-local" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM:SS)" value = "2017-06-02T08:30" min="2017-06-01T08:30" max="2030-06-30T16:30" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" name="departureTime" required/><br>
       <span class="validity"></span>
-      <input type="text" size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus" required pattern="Arrived|Charging"   list="l1" /><br>
+      <input type="text" value = "Arrived" size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus" required pattern="Arrived|Charging"   list="l1" /><br>
           <datalist id="l1">
               <option>Arrived</option>
               <option>Charging</option>
