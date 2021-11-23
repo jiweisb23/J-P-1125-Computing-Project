@@ -127,6 +127,7 @@ def optimize():
 		if vehicles[v]['pushDeparture']>0:
 			show += ' ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
 
+	print("NEED TO ADD AN INFEASIBILITY CHECK!!")
 	return str(show)
 
 
