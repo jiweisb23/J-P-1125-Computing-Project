@@ -93,7 +93,7 @@
   <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
     <button onclick="optimize()">Optimize</button>
-    <button target="_blank" onclick="GetVehicles()">Get Vehicles</button>
+    <button onclick="GetVehicles()">Get Vehicles</button>
     <div id="output"></div>
     </header>
   </div>
@@ -135,7 +135,7 @@
 	<script>
 	function GetVehicles(){
 	   var url = '/GetVehicles.html';
-     window.location = url
+     window.open = (url, '_blank')
 
 	   
 
