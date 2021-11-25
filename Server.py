@@ -132,8 +132,8 @@ def optimize():
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
 	print('len vehicles: ' + str(len(vehicles)))
-	if res[0]=="INFEASIBLE":
-		show+= " ... Infeasible problem, sorry! Database not updated" 
+	if res[0]=="NOT OPTIMAL":
+		show+= " ... Non-Optimal result, sorry! Database not updated" 
 	else:
 		for v in vehicles:
 			print(v)

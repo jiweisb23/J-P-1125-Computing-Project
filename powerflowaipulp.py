@@ -66,7 +66,7 @@ def optimizer(vehicles, curTime):
     demand_rate = 15 #utility demand charge [$/kW]
 
     ## Site characteristics 
-    site_power_capacity = 100000  #the site power capacity [kW]
+    site_power_capacity = 0*100000  #the site power capacity [kW]
         #common: 45, 75, 112.5, 150, 225, 300, 500, 750, and 1,000 kVA
 
 
@@ -278,8 +278,8 @@ def optimizer(vehicles, curTime):
     res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity, curTime)
     print(res)
     print(p.LpStatus[status])
-    if p.LpStatus[status] == "Infeasible":
-        return ("INFEASIBLE", res)
+    if p.LpStatus[status] != "Optimal":
+        return ("NOT OPTIMAL", res)
     else:
         return (p.value(m.objective), res)
 
