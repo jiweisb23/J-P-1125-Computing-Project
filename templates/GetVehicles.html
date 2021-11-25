@@ -1,19 +1,6 @@
 
 <title> Database Results </title>
 <head> Active Vehicles: </head>
-<br>
-<table>
-{% for key, value in dict.items() %}
-   <tr>
-        <th> {{ key }} </th> 
-        <td><br>{{ value }} </td>
-   </tr>
-   
-{% endfor %}
-</table>
-
-
-
 
 <br>
 <table>
@@ -22,7 +9,7 @@
         <th> {{ key }} </th> 
         {% for key2, value2 in value.items() %}
            <tr>
-                <th> {{ key2 }} </th> 
+                <td> {{ key2 }} </td>
                 <td><br>{{ value2 }} </td>
            </tr>
            
