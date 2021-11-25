@@ -43,12 +43,10 @@ test_dict = {'2': {'currentTime': datetime(2021, 11, 21, 9, 0), 'currentCharge':
 
 
 
-def optimizer(vehicles):
+def optimizer(vehicles, curTime):
     print("Optimizing1!")
 
     systime = datetime.now()
-    pytz.utc.localize( datetime.utcnow() ) 
-    curTime = datetime.now()-timedelta(hours=5)
 
     m = p.LpProblem('Charging', p.LpMinimize)
     np.random.seed(2)

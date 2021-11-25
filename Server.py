@@ -114,10 +114,21 @@ def getVehiclesUnwrapped():
 
 
 
+def removePastDept(curTime):
+    cur = mysql.get_db().cursor()
+    cur.execute("UPDATE Vehicles SET recordStatus='inactive' WHERE departureTime<%s",(curTime))
+    mysql.get_db().commit()
+    return
+
+
+
 
 @app.route('/optimize/')
 def optimize():
-	res = optimizer(getVehiclesUnwrapped())
+	pytz.utc.localize( datetime.utcnow() ) 
+    curTime = datetime.now()-timedelta(hours=5)
+    
+	res = optimizer(getVehiclesUnwrapped(), curTime)
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
 	print('len vehicles: ' + str(len(vehicles)))
