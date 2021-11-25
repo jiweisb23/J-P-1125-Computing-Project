@@ -47,6 +47,8 @@ def optimizer(vehicles):
     print("Optimizing1!")
 
     systime = datetime.now()
+    pytz.utc.localize( datetime.utcnow() ) 
+    curTime = datetime.now()-timedelta(hours=5)
 
     m = p.LpProblem('Charging', p.LpMinimize)
     np.random.seed(2)
@@ -86,19 +88,19 @@ def optimizer(vehicles):
 
     expected_energy_amount = 0
     maxHours = 0
-    pytz.utc.localize( datetime.utcnow() ) 
+    
     for v in vehicles:
         
         #Find & Store how long we have until departure
-        if  vehicles[v]['departureTime'] > (datetime.now()-timedelta(hours=5)): 
-            hoursToDeparture =   (vehicles[v]['departureTime'] - (datetime.now()-timedelta(hours=5))).seconds/60/60
+        if  vehicles[v]['departureTime'] > curTime: 
+            hoursToDeparture =   (vehicles[v]['departureTime'] - curTime).seconds/60/60
         else:
             hoursToDeparture = 0 
         vehicles[v]['hoursToDeparture'] = hoursToDeparture
 
         #Find & Store how much we've charged arleady, calculate starting point
         if vehicles[v]['lastChargingStatus'] =='True' or vehicles[v]['newStatus'] == 'Charging':
-            vehicles[v]['hoursCharging'] = (datetime.now()-timedelta(hours=5) - vehicles[v]['currentTime']).seconds/60/60
+            vehicles[v]['hoursCharging'] = (curTime - vehicles[v]['currentTime']).seconds/60/60
         else:
             vehicles[v]['hoursCharging'] = 0
         battery_energy_current[v, 0] = min(battery_energy_capacity, vehicles[v]['currentCharge']*battery_energy_capacity + vehicles[v]['hoursCharging']*(charging_rate/rate_divisor))     #intialize
@@ -275,20 +277,20 @@ def optimizer(vehicles):
 
     print(p.LpStatus[status], ": ", p.value(m.objective), " ... Peak Demand Rate: ", p.value(peak)*demand_rate)
 
-    res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity)
+    res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity, curTime)
     print(res)
 
     return (p.value(m.objective), res)
 
 
 
-def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity):
+def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity, curTime):
     for v in vehicles:
         min_t = simulation_time
         for t in range(1, simulation_time, 1): 
             if p.value(charging_now[v, t]) == 1:
                 min_t = min(min_t, t)
-        vehicles[v]['recommendedChargeTime'] = (datetime.now()-timedelta(hours=5)) + timedelta(hours = (min_t-1)/rate_divisor )
+        vehicles[v]['recommendedChargeTime'] = (curTime) + timedelta(hours = (min_t-1)/rate_divisor )
         vehicles[v]['currentCharge'] = vehicles[v]['battery_energy_current'] / battery_energy_capacity * 100
         vehicles[v]['desiredCharge'] = vehicles[v]['desiredCharge'] * 100
         vehicles[v]['departureTime'] = vehicles[v]['departureTime'] + timedelta(hours = vehicles[v]['pushDeparture'])
