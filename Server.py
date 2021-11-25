@@ -90,7 +90,7 @@ def update(v):
 
 #ToDo: Create HTML? See https://github.com/onexi/threetiers/blob/main/web/templates/colleges.html
 #ToDo: Typecast all vars to str?
-@app.route('/GetVehicles/')
+@app.route('/GetVehicles.html')
 def GetVehicles():
 	d = getVehiclesUnwrapped()
 	if d != {}:
