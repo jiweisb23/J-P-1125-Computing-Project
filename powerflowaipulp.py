@@ -66,7 +66,7 @@ def optimizer(vehicles, curTime):
     demand_rate = 15 #utility demand charge [$/kW]
 
     ## Site characteristics 
-    site_power_capacity = 0*100000  #the site power capacity [kW]
+    site_power_capacity = 100000  #the site power capacity [kW]
         #common: 45, 75, 112.5, 150, 225, 300, 500, 750, and 1,000 kVA
 
 
