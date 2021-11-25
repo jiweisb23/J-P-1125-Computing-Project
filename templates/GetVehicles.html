@@ -6,12 +6,14 @@
 <table>
 {% for key, value in dict.items() %}
    <tr>
+        <br> 
         <th> {{ key }} </th> 
+
         {% for key2, value2 in value.items() %}
            <tr>
                 <td> {{ key2 }} </td>
                 <td> {{ value2 }} </td>
-                <br>
+                
            </tr>
           
         {% endfor %}
