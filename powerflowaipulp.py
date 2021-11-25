@@ -40,6 +40,7 @@ def readVehicles(db):
 
 
 test_dict = {'2': {'currentTime': datetime(2021, 11, 21, 9, 0), 'currentCharge': .15, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 13, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}, '1': {'currentTime': datetime(2021, 11, 21, 9, 1), 'currentCharge': .10, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 17, 31), 'newStatus': 'Charging', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
+test_dict2 = {'3': {'vehicleNo': '3', 'currentTime': datetime(2021, 11, 25, 10, 52), 'currentCharge': .3456944444444444, 'desiredCharge': .900, 'departureTime': datetime(2021, 11, 26, 10, 0), 'newStatus': 'Arrived', 'lastChargingStatus': 'False', 'recommendedChargeTime': datetime(2021, 11, 26, 9, 14, 15, 504989), 'hoursToDeparture': 21.762222222222224, 'hoursCharging': 1.3708333333333333, 'battery_energy_current': 51.854166666666664, 'pushDeparture': 0}, '4': {'vehicleNo': '4', 'currentTime': datetime(2021, 11, 25, 11, 49), 'currentCharge': .300, 'desiredCharge': .950, 'departureTime': datetime(2021, 11, 25, 21, 59, 16), 'newStatus': 'Arrived', 'lastChargingStatus': 'False', 'recommendedChargeTime': datetime(2021, 11, 25, 12, 44, 15, 504989), 'hoursToDeparture': 4.762222222222222, 'hoursCharging': 0, 'battery_energy_current': 45.0, 'pushDeparture': 4.987777777777778}, '5': {'vehicleNo': '5', 'currentTime': datetime(2021, 11, 25, 12, 8), 'currentCharge': .300, 'desiredCharge': .800, 'departureTime': datetime(2021, 11, 25, 19, 44, 16), 'newStatus': 'Arrived', 'lastChargingStatus': 'False', 'recommendedChargeTime': datetime(2021, 11, 25, 12, 44, 15, 504989), 'hoursToDeparture': 3.762222222222222, 'hoursCharging': 0, 'battery_energy_current': 45.0, 'pushDeparture': 3.737777777777778}}
 
 
 
@@ -108,10 +109,10 @@ def optimizer(vehicles, curTime):
         vehicleEnergyNeeded = (vehicles[v]['desiredCharge'] )*battery_energy_capacity - battery_energy_current[v, 0]
         expected_energy_amount+= vehicleEnergyNeeded
 
+
         #find out how much time we actually need for all desired charges
         pushDeparture = max(vehicleEnergyNeeded / charging_rate - hoursToDeparture,0)
         vehicles[v]['pushDeparture'] = pushDeparture 
-
         maxHours = max(hoursToDeparture + pushDeparture, maxHours)
 
 
@@ -230,11 +231,11 @@ def optimizer(vehicles, curTime):
 
             #the battery energy increases by charging rate
             #Constraint: Dont exceed the max charge (aka battery capacity)
-            m += battery_energy_current[v, 0]+sum(charging_now[v,t2]*(charging_rate/rate_divisor) for t2 in range(1,t+1)) <= vehicles[v]['desiredCharge'] * battery_energy_capacity + charging_rate - 1 
+            m += battery_energy_current[v, 0]+sum(charging_now[v,t2]*(charging_rate/rate_divisor) for t2 in range(1,t+1)) <= 1 * battery_energy_capacity + charging_rate/rate_divisor - 1 
 
             # Activation Constraints:
             # (Fully charged can only be 1 if charge is at least minimum threshold)
-            m += fully_charged[v, t] <= (battery_energy_current[v, 0]+sum(charging_now[v,t2]*(charging_rate/rate_divisor) for t2 in range(1,t+1))) / (vehicles[v]['desiredCharge'] * battery_energy_capacity)
+            m += fully_charged[v, t] <= (battery_energy_current[v, 0]+sum(charging_now[v,t2]*(charging_rate/rate_divisor) for t2 in range(1,t+1))) / (vehicles[v]['desiredCharge'] * battery_energy_capacity ) #- charging_rate/rate_divisor+1 
 
             # fully_charged_at_t[i, t] >= (Charge[i, t] + charging_rate / 10) / max_charge – 1
             # m.addConstr(fully_charged[i, t] >= battery_energy_current[(i, t - 1)] / battery_energy_final_min + 0.00001 - 1)
@@ -242,8 +243,8 @@ def optimizer(vehicles, curTime):
             # Constraint: If you’re charging at time t-1, then you’re either charging at time t or you’re fully charged at time t
             m += charging_now[v, t - 1] <= charging_now[v, t] + fully_charged[v, t]
 
-            #Constraint: Can't charge after desired Departure time:
-            if t >= (vehicles[v]['hoursToDeparture']+vehicles[v]['pushDeparture'])*rate_divisor:
+            #Constraint: Can't charge after desired Departure time (end of period):
+            if t >= (vehicles[v]['hoursToDeparture']+vehicles[v]['pushDeparture'])*rate_divisor+1:
                 m+= charging_now[v,t]==0
                 m+= fully_charged[v,t]==1
 
@@ -303,7 +304,7 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
     
 
 
-#print(optimizer(test_dict, datetime.now())[0])
+#print(optimizer(test_dict2, datetime.now()))
 
 if __name__ == "__optimizer__":
 
