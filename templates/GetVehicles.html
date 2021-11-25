@@ -11,3 +11,23 @@
    
 {% endfor %}
 </table>
+
+
+
+
+<br>
+<table>
+{% for key, value in dict.items() %}
+   <tr>
+        <th> {{ key }} </th> 
+        {% for key2, value2 in value.items() %}
+           <tr>
+                <th> {{ key2 }} </th> 
+                <td><br>{{ value2 }} </td>
+           </tr>
+           
+        {% endfor %}
+   </tr>
+   
+{% endfor %}
+</table>
