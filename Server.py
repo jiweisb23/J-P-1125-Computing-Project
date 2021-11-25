@@ -132,13 +132,15 @@ def optimize():
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
 	print('len vehicles: ' + str(len(vehicles)))
-	for v in vehicles:
-		print(v)
-		addVehicleUnwrapped(vehicles[v], False)
-		if vehicles[v]['pushDeparture']>0:
-			show += ' ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
+	if res[0]=="INFEASIBLE":
+		show+= " ... Infeasible problem, sorry! Database not updated" 
+	else:
+		for v in vehicles:
+			print(v)
+			addVehicleUnwrapped(vehicles[v], False)
+			if vehicles[v]['pushDeparture']>0:
+				show += ' ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
 
-	print("NEED TO ADD AN INFEASIBILITY CHECK!!")
 	return str(show)
 
 

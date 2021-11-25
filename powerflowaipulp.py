@@ -277,8 +277,11 @@ def optimizer(vehicles, curTime):
 
     res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity, curTime)
     print(res)
-
-    return (p.value(m.objective), res)
+    print(p.LpStatus[status])
+    if p.LpStatus[status] == "Infeasible":
+        return ("INFEASIBLE", res)
+    else:
+        return (p.value(m.objective), res)
 
 
 
@@ -300,7 +303,7 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
     
 
 
-#print(optimizer(test_dict))
+#print(optimizer(test_dict, datetime.now())[0])
 
 if __name__ == "__optimizer__":
 
