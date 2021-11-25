@@ -126,8 +126,8 @@ def removePastDept(curTime):
 @app.route('/optimize/')
 def optimize():
 	pytz.utc.localize( datetime.utcnow() ) 
-    curTime = datetime.now()-timedelta(hours=5)
-    
+	curTime = datetime.now()-timedelta(hours=5)
+
 	res = optimizer(getVehiclesUnwrapped(), curTime)
 	show = 'Cost= ' + str(res[0])
 	vehicles = res[1]
