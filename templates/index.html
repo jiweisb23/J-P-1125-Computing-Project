@@ -60,35 +60,35 @@
   </div>
 
   <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+    <header class="d-flex flex-wrap justify-content-center py-2 mb-2">
       <form method="POST" action="/addVehicle">
-        Add a Vehicle:<br>
-      <input type="text" required size = 40 placeholder = "Vehicle #" name="vehicleNo"  /><br>
-      <input type="number" max = 100 min = 0 size = 40 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
-      <input type="number" max = 100 min = 0  size = 40 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
-      <input type="text" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" required  name="departureTime" /><br>
+      <div class="d-flex flex-wrap justify-content-center mb-2">Add a Vehicle:</div>
+      <input type="text" required size = 30 placeholder = "Vehicle #" name="vehicleNo"  /><br>
+      <input type="number" max = 100 min = 0 size = 30 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
+      <input type="number" max = 100 min = 0  size = 30 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
+      <input type="text" size = 30 placeholder = "Departure Time (YYYY-MM-DD HH:MM)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" required  name="departureTime" /><br>
       <span class="validity"></span>
-      <input type="text" required pattern="Arrived|Charging"   list="l1"  size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus"  /><br>
+      <input type="text" required pattern="Arrived|Charging"   list="l1"  size = 30 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus"  /><br>
         <datalist id="l1">
           <option>Arrived</option>
           <option>Charging</option>
         </datalist>
-      <input type="submit">
+      <div class="d-flex flex-wrap justify-content-center py-2"><input type="submit" placeholder = "Add Vehicle" class="square_btn2"></div>
       </form>
     </header>
   </div>
 
   <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
-      <a href="#" class="square_btn" onclick="GetVehicles()">Show Vehicles</a>
+    <header class="d-flex flex-wrap justify-content-center py-2 mb-4">
+      <a href="#" class="square_btn2" onclick="GetVehicles()">Show Vehicles</a>
       <!--<button onclick="GetVehicles()">Get Vehicles</button>-->
     <div id="output"></div>
     </header>
   </div>
 
   <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
-      <a href="#" class="square_btn" onclick="optimize()">Optimize</a>
+    <header class="d-flex flex-wrap justify-content-center py-4 mb-4">
+      <a href="#" class="square_btn" onclick="Optimize()">Optimize</a>
       <!--<button onclick="optimize()">Optimize</button>-->
     <div id="output"></div>
     </header>
