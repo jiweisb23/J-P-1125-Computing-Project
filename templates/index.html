@@ -66,7 +66,7 @@
       <input type="text" required size = 40 placeholder = "Vehicle #" name="vehicleNo"  /><br>
       <input type="number" max = 100 min = 0 size = 40 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
       <input type="number" max = 100 min = 0  size = 40 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
-      <input type="text" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM:SS)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" required  name="departureTime" /><br>
+      <input type="text" size = 40 placeholder = "Departure Time (YYYY-MM-DD HH:MM)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" required  name="departureTime" /><br>
       <span class="validity"></span>
       <input type="text" required pattern="Arrived|Charging"   list="l1"  size = 40 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus"  /><br>
         <datalist id="l1">
@@ -80,8 +80,16 @@
 
   <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
-    <button onclick="optimize()">Optimize</button>
-    <button onclick="GetVehicles()">Get Vehicles</button>
+      <a href="#" class="square_btn" onclick="GetVehicles()">Show Vehicles</a>
+      <!--<button onclick="GetVehicles()">Get Vehicles</button>-->
+    <div id="output"></div>
+    </header>
+  </div>
+
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+      <a href="#" class="square_btn" onclick="Optimize()">Optimize</a>
+      <!--<button onclick="optimize()">Optimize</button>-->
     <div id="output"></div>
     </header>
   </div>
