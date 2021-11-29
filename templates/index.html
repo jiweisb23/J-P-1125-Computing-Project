@@ -96,6 +96,8 @@
 
 </main>
 
+
+
   </body>
 
 
@@ -104,6 +106,7 @@
 	<script>
 	function optimize(){
 	   var url = '/optimize/';
+     
 
 	   superagent
 	       .get(url)
@@ -112,6 +115,9 @@
 	               console.log('err:',err);
 	           } else {
 	               console.log('response:',res.text);
+                 document.body.append("\n")
+                 document.body.append("Optimize at ")
+                 document.write(Date().toLocaleDateString())
 	               document.body.append(res.text)
 	               //return res.text
 
