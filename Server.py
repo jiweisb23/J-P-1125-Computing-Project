@@ -135,7 +135,7 @@ def optimize():
 	removePastDept(curTime)
 	res = optimizer(getVehiclesUnwrapped(), curTime)
 	show = 'Cost = $' + str(round(res[0],2 ))
-	show +="\n Savings = $" +str(res[2])
+	show +="\n Savings = $" +str(round(res[2],2))
 	vehicles = res[1]
 	print('len vehicles: ' + str(len(vehicles)))
 	if res[0]=="NOT OPTIMAL":
