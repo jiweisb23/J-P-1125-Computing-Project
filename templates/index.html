@@ -64,8 +64,8 @@
       <form method="POST" action="/addVehicle">
       <div class="d-flex flex-wrap justify-content-center mb-2">Add a Vehicle:</div>
       <input type="text" required size = 30 placeholder = "Vehicle #" name="vehicleNo"  /><br>
-      <input type="number" max = 100 min = 0 size = 30 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
-      <input type="number" max = 100 min = 0  size = 30 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
+      <input type="number" max = 100 min = 0 size = 30 placeholder = "(#%)" name="currentCharge"/>Current Charge<br>
+      <input type="number" max = 100 min = 0  size = 30 placeholder = "(#%)" name="desiredCharge"/>Desired Charge<br>
       <input type="text" size = 30 placeholder = "Departure Time (YYYY-MM-DD HH:MM)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" required  name="departureTime" /><br>
       <span class="validity"></span>
       <input type="text" required pattern="Arrived|Charging"   list="l1"  size = 30 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus"  /><br>
