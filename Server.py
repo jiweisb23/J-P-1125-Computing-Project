@@ -144,7 +144,7 @@ def optimize():
 			print(v)
 			addVehicleUnwrapped(vehicles[v], False)
 			if vehicles[v]['pushDeparture']>0:
-				show += ' ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
+				show += '\n ... warning, vehicle ' + v + ' has a new, delayed departure time...  '
 
 	return str(show)
 
