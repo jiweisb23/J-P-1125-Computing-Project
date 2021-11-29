@@ -94,6 +94,8 @@
     </header>
   </div>
 
+  <p id = "res_"></p>
+
 </main>
 
 
@@ -117,7 +119,7 @@
 	               console.log('err:',err);
 	           } else {
 	               console.log('response:',res.text);
-                 document.body.append(String.fromCharCode(10)+String.fromCharCode(10)+"Optimize at "  + currentDate.toLocaleString()+ ": " +String.fromCharCode(10));
+                 document.getElementById("res_").textContent +=String.fromCharCode(10)+String.fromCharCode(10)+"Optimize at "  + currentDate.toLocaleString()+ ": " +String.fromCharCode(10));
 	               document.body.append(res.text);
 	               //return res.text
 
