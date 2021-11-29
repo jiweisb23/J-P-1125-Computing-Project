@@ -120,7 +120,7 @@
 	           } else {
 	               console.log('response:',res.text);
                  document.getElementById("res_").textContent +=String.fromCharCode(10)+String.fromCharCode(10)+"Optimize at "  + currentDate.toLocaleString()+ ": " +String.fromCharCode(10);
-	               document.body.append(res.text);
+	               document.getElementById("res_").textContent += res.text;
 	               //return res.text
 
 	           }
