@@ -106,6 +106,8 @@
 	<script>
 	function optimize(){
 	   var url = '/optimize/';
+     var nl = document.createElement("br");
+     element.appendChild(nl);
 
 
 	   superagent
@@ -115,8 +117,7 @@
 	               console.log('err:',err);
 	           } else {
 	               console.log('response:',res.text);
-                 document.body.append("<br/>Optimize at ");
-                 document.body.append(Date().toDateString());
+                 document.body.append("Optimize at ");
 	               document.body.append(res.text);
 	               //return res.text
 
