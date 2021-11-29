@@ -47,94 +47,19 @@
       </span>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Dashboard</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">About</a></li>
       </ul>
-    </header>
-  </div>
-
-  <!--<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
-        Current Date and Time: <span id='date-time'></span>
-    </header>
-  </div>-->
-
-  <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-2 mb-2">
-      <form method="POST" action="/addVehicle">
-      <div class="d-flex flex-wrap justify-content-center mb-2">Add a Vehicle:</div>
-      <input type="text" required size = 30 placeholder = "Vehicle #" name="vehicleNo"  /><br>
-      <input type="number" max = 100 min = 0 size = 30 placeholder = "Current Charge (#%)" name="currentCharge"/><br>
-      <input type="number" max = 100 min = 0  size = 30 placeholder = "Desired Charge (#%)" name="desiredCharge"/><br>
-      <input type="text" size = 30 placeholder = "Departure Time (YYYY-MM-DD HH:MM)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}" required  name="departureTime" /><br>
-      <span class="validity"></span>
-      <input type="text" required pattern="Arrived|Charging"   list="l1"  size = 30 placeholder = "NewStatus {Arrived / Charging}?" name="newStatus"  /><br>
-        <datalist id="l1">
-          <option>Arrived</option>
-          <option>Charging</option>
-        </datalist>
-      <div class="d-flex flex-wrap justify-content-center py-2"><input type="submit" value = "Add Vehicle" class="square_btn2"></div>
-      </form>
-    </header>
-  </div>
-
-  <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-2 mb-4">
-      <a href="#" class="square_btn2" onclick="GetVehicles()">Show Vehicles</a>
-      <!--<button onclick="GetVehicles()">Get Vehicles</button>-->
-    <div id="output"></div>
     </header>
   </div>
 
   <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-4 mb-4">
-      <a href="#" class="square_btn" onclick="optimize()">Optimize</a>
-      <!--<button onclick="optimize()">Optimize</button>-->
-    <div id="output"></div>
+      <p> About Power Flow AI</p>
     </header>
   </div>
 
 </main>
-
-  </body>
-
-
-	<script src="https://cdn.jsdelivr.net/npm/superagent"></script>
-
-	<script>
-	function optimize(){
-	   var url = '/optimize/';
-
-	   superagent
-	       .get(url)
-	       .end(function(err, res){
-	           if (err) {
-	               console.log('err:',err);
-	           } else {
-	               console.log('response:',res.text);
-	               document.body.append(res.text)
-	               //return res.text
-
-	           }
-
-	       });
-
-		
-	}
-
-	</script>
-
-
-	<script>
-	function GetVehicles(){
-	   var url = '/GetVehicles.html';
-     window.open(url, '_blank')
-
-	   
-
-	}
-
-	</script>
 
 
 
