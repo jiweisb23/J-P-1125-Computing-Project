@@ -99,7 +99,7 @@ def optimizer(vehicles, curTime):
 
         #Find & Store how much we've charged arleady, calculate starting point
         if vehicles[v]['lastChargingStatus'] =='True' or vehicles[v]['newStatus'] == 'Charging':
-            vehicles[v]['hoursCharging'] = (curTime - vehicles[v]['currentTime']).seconds/60/60
+            vehicles[v]['hoursCharging'] = max((curTime - vehicles[v]['currentTime']).seconds/60/60,0)
         else:
             vehicles[v]['hoursCharging'] = 0
         battery_energy_current[v, 0] = min(battery_energy_capacity, vehicles[v]['currentCharge']*battery_energy_capacity + vehicles[v]['hoursCharging']*(charging_rate/rate_divisor))     #intialize
