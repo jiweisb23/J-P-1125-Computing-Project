@@ -1,6 +1,4 @@
-* {
-  white-space: pre-line;
-}
+
 
 .b-example-divider {
   height: 3rem;
@@ -66,3 +64,8 @@ border-radius: 25px;
   background-image: -webkit-linear-gradient(45deg, #7c7c7c 0%, #464545 100%);
   background-image: linear-gradient(45deg, #7c7c7c 0%, #464545 100%);
 }
+
+* {
+  white-space: pre-line;
+}
+
