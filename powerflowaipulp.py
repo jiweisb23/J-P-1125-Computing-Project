@@ -41,7 +41,7 @@ def readVehicles(db):
 
 test_dict = {'2': {'currentTime': datetime(2021, 11, 21, 9, 0), 'currentCharge': .15, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 13, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}, '1': {'currentTime': datetime(2021, 11, 21, 9, 1), 'currentCharge': .10, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 21, 17, 31), 'newStatus': 'Charging', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
 test_dict2 = {'3': {'vehicleNo': '3', 'currentTime': datetime(2021, 11, 25, 10, 52), 'currentCharge': .3456944444444444, 'desiredCharge': .900, 'departureTime': datetime(2021, 11, 26, 10, 0), 'newStatus': 'Arrived', 'lastChargingStatus': 'False', 'recommendedChargeTime': datetime(2021, 11, 26, 9, 14, 15, 504989), 'hoursToDeparture': 21.762222222222224, 'hoursCharging': 1.3708333333333333, 'battery_energy_current': 51.854166666666664, 'pushDeparture': 0}, '4': {'vehicleNo': '4', 'currentTime': datetime(2021, 11, 25, 11, 49), 'currentCharge': .300, 'desiredCharge': .950, 'departureTime': datetime(2021, 11, 25, 21, 59, 16), 'newStatus': 'Arrived', 'lastChargingStatus': 'False', 'recommendedChargeTime': datetime(2021, 11, 25, 12, 44, 15, 504989), 'hoursToDeparture': 4.762222222222222, 'hoursCharging': 0, 'battery_energy_current': 45.0, 'pushDeparture': 4.987777777777778}, '5': {'vehicleNo': '5', 'currentTime': datetime(2021, 11, 25, 12, 8), 'currentCharge': .300, 'desiredCharge': .800, 'departureTime': datetime(2021, 11, 25, 19, 44, 16), 'newStatus': 'Arrived', 'lastChargingStatus': 'False', 'recommendedChargeTime': datetime(2021, 11, 25, 12, 44, 15, 504989), 'hoursToDeparture': 3.762222222222222, 'hoursCharging': 0, 'battery_energy_current': 45.0, 'pushDeparture': 3.737777777777778}}
-
+test_dict3 = {'2': {'currentTime': datetime(2021, 11, 29, 10, 30), 'currentCharge': .15, 'desiredCharge': .90, 'departureTime': datetime(2021, 11, 30, 13, 31), 'newStatus': 'Arrived', 'lastChargingStatus': None, 'recommendedChargeTime': None}}
 
 
 def optimizer(vehicles, curTime):
@@ -275,14 +275,33 @@ def optimizer(vehicles, curTime):
     print('The CPU usage is: ', psutil.cpu_percent(4))
 
     print(p.LpStatus[status], ": ", p.value(m.objective), " ... Peak Demand Rate: ", p.value(peak)*demand_rate)
-
+    defaultCost = calcDefault(vehicles, energy_charge_at_time_t, demand_rate, battery_energy_capacity, simulation_time, charging_rate, rate_divisor)
+    print("defaultCost: ", defaultCost)
     res = parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, battery_energy_capacity, curTime)
     print(res)
     print(p.LpStatus[status])
     if p.LpStatus[status] != "Optimal":
         return ("NOT OPTIMAL", res)
     else:
-        return (p.value(m.objective), res)
+        return (p.value(m.objective), res, defaultCost - p.value(m.objective)) 
+
+
+def calcDefault(vehicles, energy_charge_at_time_t, demand_rate, battery_energy_capacity, simulation_time, charging_rate, rate_divisor):
+    defaultPeak = 0
+    defaultCharge = 0 
+    runCharge = vehicles['2']['battery_energy_current']-vehicles['2']['desiredCharge']*battery_energy_capacity
+    for t in range(1, simulation_time, 1):  # for each time t
+        tempPeak = 0
+        for v in vehicles:  # For each van i
+            #print("test: ",vehicles[v]['desiredCharge']-vehicles[v]['battery_energy_current']  )
+            if t <= (vehicles[v]['desiredCharge']*battery_energy_capacity-vehicles[v]['battery_energy_current']+ charging_rate/rate_divisor - 1) / (charging_rate / rate_divisor):
+                tempPeak += (charging_rate/rate_divisor)
+                defaultCharge += (charging_rate/rate_divisor)*energy_charge_at_time_t[t]
+                runCharge += (charging_rate/rate_divisor)
+            #print("runCharge: " , runCharge)
+        defaultPeak = max(tempPeak, defaultPeak)
+    return defaultPeak*demand_rate + defaultCharge
+        
 
 
 
@@ -304,7 +323,7 @@ def parseVehicleResult(vehicles, charging_now, rate_divisor, simulation_time, ba
     
 
 
-#print(optimizer(test_dict2, datetime.now()))
+#print(optimizer(test_dict3, datetime.now()))
 
 if __name__ == "__optimizer__":
 
