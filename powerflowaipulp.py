@@ -17,12 +17,12 @@ import sys
 
 
 
-
+#This function reads a text list that is output
 def readVehicles(db):
     vehicles = {}
     datefmt = '%Y-%m-%d %H:%M'
     for r in db:
-        if r[9] == 'active':
+        if r[8] == 'active':
             v = r[0]
             vehicles[v]={}
             dt = r[1].split(":")[0] + ':' + r[1].split(":")[1]
