@@ -1,0 +1,66 @@
+
+
+
+
+superagent
+	       .get(url)
+	       .end(function(err, res){
+	           if (err) {
+	               console.log('err:',err);
+	           } else {
+	               console.log('response:',res.text);
+	               document.body.append(res.text)
+
+
+	           }
+
+	       });
+
+
+
+
+
+<table border = 1>
+
+  {% for key, value in dict.items() %}
+  {{ key }} : {{ value }}          
+  {% endfor %}              
+
+</table>
+
+
+
+
+
+
+
+
+
+          
+	<script>
+	function XaddVehicle(){
+	   var vehicleNo = document.getElementById('vehicleNo').value;
+	   var currentCharge = document.getElementById('currentCharge').value;
+	   var desiredCharge = document.getElementById('desiredCharge').value;
+	   var departureTime = document.getElementById('departureTime').value;
+	   var newStatus = document.getElementById('newStatus').value;
+	   console.log(vehicleNo);
+	   console.log(currentTime);
+	   console.log(currentCharge);
+	   console.log(desiredCharge);
+	   console.log(departureTime);
+	   console.log(newStatus);
+
+	   var url = `/XaddVehicle?vehicleNo=${vehicleNo}&currentCharge=${currentCharge}&desiredCharge=${desiredCharge}&departureTime=${departureTime}&newStatus=${newStatus}`;
+
+	   superagent
+	       .get(url)
+	       .end(function(err, res){
+	           if (err) {
+	               console.log('err:',err);
+	           } else {
+	               console.log('response:',res.text);
+	           }
+	       });
+	}
+	</script>

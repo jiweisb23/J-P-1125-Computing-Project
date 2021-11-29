@@ -17,12 +17,12 @@ import sys
 
 
 
-
+#This function reads a text list that is output
 def readVehicles(db):
     vehicles = {}
     datefmt = '%Y-%m-%d %H:%M'
     for r in db:
-        if r[9] == 'active':
+        if r[8] == 'active':
             v = r[0]
             vehicles[v]={}
             dt = r[1].split(":")[0] + ':' + r[1].split(":")[1]
@@ -289,7 +289,7 @@ def optimizer(vehicles, curTime):
 def calcDefault(vehicles, energy_charge_at_time_t, demand_rate, battery_energy_capacity, simulation_time, charging_rate, rate_divisor):
     defaultPeak = 0
     defaultCharge = 0 
-    runCharge = vehicles['2']['battery_energy_current']-vehicles['2']['desiredCharge']*battery_energy_capacity
+    #runCharge = vehicles['2']['battery_energy_current']-vehicles['2']['desiredCharge']*battery_energy_capacity
     for t in range(1, simulation_time, 1):  # for each time t
         tempPeak = 0
         for v in vehicles:  # For each van i
@@ -297,7 +297,7 @@ def calcDefault(vehicles, energy_charge_at_time_t, demand_rate, battery_energy_c
             if t <= (vehicles[v]['desiredCharge']*battery_energy_capacity-vehicles[v]['battery_energy_current']+ charging_rate/rate_divisor - 1) / (charging_rate / rate_divisor):
                 tempPeak += (charging_rate/rate_divisor)
                 defaultCharge += (charging_rate/rate_divisor)*energy_charge_at_time_t[t]
-                runCharge += (charging_rate/rate_divisor)
+                #runCharge += (charging_rate/rate_divisor)
             #print("runCharge: " , runCharge)
         defaultPeak = max(tempPeak, defaultPeak)
     return defaultPeak*demand_rate + defaultCharge
