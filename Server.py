@@ -134,7 +134,7 @@ def optimize():
 	curTime = datetime.now()-timedelta(hours=5)
 	removePastDept(curTime)
 	res = optimizer(getVehiclesUnwrapped(), curTime)
-	show = 'Cost = $' + str(res[0])
+	show = 'Cost = $' + str(round(res[0],2 ))
 	show +="\n Savings = $" +str(res[2])
 	vehicles = res[1]
 	print('len vehicles: ' + str(len(vehicles)))
