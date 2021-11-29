@@ -97,7 +97,6 @@
 </main>
 
 
-
   </body>
 
 
@@ -106,6 +105,14 @@
 	<script>
 	function optimize(){
 	   var url = '/optimize/';
+     var h1  = document.createElement("h1");
+     h1.setAttribute('style', 'white-space: pre;');
+     h1.textContent = "
+     ...";
+     h1.textContent += "Optimize at ";
+     h1.textContent += Date().toDateString();
+     h1.textContent += "
+     ...";
      
 
 	   superagent
@@ -115,16 +122,14 @@
 	               console.log('err:',err);
 	           } else {
 	               console.log('response:',res.text);
-                 document.appendChild(document.createNode('br'));
-                 document.body.append("Optimize at ");
-                 document.body.append(Date().toDateString());
-	               document.body.append(res.text);
+                 h1.textContent += res.text;
+	               //document.body.append(res.text);
 	               //return res.text
 
 	           }
 
 	       });
-
+      document.body.appendChild(h1);
 		
 	}
 
