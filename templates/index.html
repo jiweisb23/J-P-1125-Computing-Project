@@ -106,7 +106,7 @@
 	<script>
 	function optimize(){
 	   var url = '/optimize/';
-
+     var currentDate = new Date();
 
 	   superagent
 	       .get(url)
@@ -115,7 +115,7 @@
 	               console.log('err:',err);
 	           } else {
 	               console.log('response:',res.text);
-                 document.body.append("\n Optimize at ");
+                 document.body.append("\n\n Optimize at " + currentdate.getDate());
 	               document.body.append(res.text);
 	               //return res.text
 
