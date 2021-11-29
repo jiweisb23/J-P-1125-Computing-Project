@@ -32,7 +32,9 @@ mysql.init_app(app)
 def index():
 	return render_template('index.html')
 
-
+@app.route('/about')
+def about():
+	return render_template('about.html')
 
 
 #ToDo: Create SQL Table, create HTML? See https://github.com/onexi/threetiers/blob/main/web/templates/index.html
