@@ -55,20 +55,35 @@ Please be patient, as results will show on the same page once the algorithm fini
 ## Packages and Resources
 
 flask (python module for web application development)
-pulp (linear programming modeler written in python)
+
+pulp (linear programming modeler written in python, instructions here: https://pypi.org/project/PuLP/)
+
 mysql (database management system)
+
 datetime (module for date and time manipulation)
+
 timedelta (use to determine time differences)
+
 pytz (timezone calculation)
+
 sys (system paramater library)
+
 jinja2 (templating)
+
 os (creating and removing directories)
+
 csv (parse csv data in python)
+
 numpy (library to handle arrays and matrices)
+
 xlsxwriter (write to csv files)
+
 matplotlib.pyplot (visulaizations in python)
+
 math (define math functions)
+
 psutil (access system details)
+
 bootstrap (css templates)
 
 Thank you to the LGO summer team for help on the charging algorithm.
